@@ -248,24 +248,24 @@ public class PlayerController : MonoBehaviour
 			PlayerStatus = (uint)(PlayerStatus & (uint)~direction_right);
 		}
 
-		if (Input.GetKeyDown (KeyCode.A)) {
+		if (Input.GetKey (KeyCode.A)) {
 			PlayerStatus = (uint)(PlayerStatus | direction_left);
 		}
-		if (Input.GetKeyUp (KeyCode.A)) {
+		else{
 			PlayerStatus = (uint)(PlayerStatus & (uint)~direction_left);
 		}
 
-		if (Input.GetKeyDown (KeyCode.W)) {
+		if (Input.GetKey (KeyCode.W)) {
 			PlayerStatus = (uint)(PlayerStatus | direction_up);
 		}
-		if (Input.GetKeyUp (KeyCode.W)) {
+		else {
 			PlayerStatus = (uint)(PlayerStatus & (uint)~direction_up);
 		}
 
-		if (Input.GetKeyDown (KeyCode.S)) {
+		if (Input.GetKey (KeyCode.S)) {
 			PlayerStatus = (uint)(PlayerStatus | direction_down);
 		}
-		if (Input.GetKeyUp (KeyCode.S)) {
+		else {
 			PlayerStatus = (uint)(PlayerStatus & (uint)~direction_down);
 		}
 
