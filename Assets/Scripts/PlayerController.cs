@@ -198,9 +198,9 @@ public class PlayerController : MonoBehaviour
 	void statuscontroller ()
 	{
 		//PlayerStatus = (uint)(PlayerStatus | direction_value);
-		if(PlayerStatus==0){
-			PlayerRigidbody.velocity = velocity_zero;
-		}
+//		if(PlayerStatus==0){
+//			PlayerRigidbody.velocity = velocity_zero;
+//		}
 
 		//check is lock status
 		if (Input.GetKeyDown (KeyCode.L)) {
@@ -315,6 +315,9 @@ public class PlayerController : MonoBehaviour
 		//check is lock status ?
 		if ((PlayerStatus & status_lock_battle) == status_lock_battle) {
 			switch (movement_status) {
+			case 0:
+				playAnimation ("Battle_Idle");
+				break;
 			case 1:
 				//move to right
 				Debug.Log ("move to right");
@@ -345,7 +348,9 @@ public class PlayerController : MonoBehaviour
 			default:
 				Debug.Log("not move");
 				break;
-			}	
+			}
+
+
 		} else {
 			switch (movement_status) {
 			case 0:
