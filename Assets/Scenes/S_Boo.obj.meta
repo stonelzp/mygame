@@ -1,0 +1,245 @@
+fileFormatVersion: 2
+guid: 4d843f9f165424e7ebf19950d4e86290
+timeCreated: 1493024324
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: _Foot_V2:Group1
+    100002: _Foot_V2:Group2
+    100004: _Foot_V2:Group3
+    100006: _Foot_V2:ZBrush_defualt_group
+    100008: _Hair_V2:Group11706
+    100010: _Head_V2:Group1
+    100012: _Head_V2:Group2
+    100014: _Head_V2:Group3
+    100016: _Head_V2:Group4
+    100018: _Head_V2:ZBrush_defualt_group
+    100020: _Lower_V2:Group1
+    100022: _Lower_V2:ZBrush_defualt_group
+    100024: _Upper_V2:Group2
+    100026: Group3
+    100028: pCylinder1
+    100030: pCylinder2
+    100032: //RootNode
+    400000: _Foot_V2:Group1
+    400002: _Foot_V2:Group2
+    400004: _Foot_V2:Group3
+    400006: _Foot_V2:ZBrush_defualt_group
+    400008: _Hair_V2:Group11706
+    400010: _Head_V2:Group1
+    400012: _Head_V2:Group2
+    400014: _Head_V2:Group3
+    400016: _Head_V2:Group4
+    400018: _Head_V2:ZBrush_defualt_group
+    400020: _Lower_V2:Group1
+    400022: _Lower_V2:ZBrush_defualt_group
+    400024: _Upper_V2:Group2
+    400026: Group3
+    400028: pCylinder1
+    400030: pCylinder2
+    400032: //RootNode
+    2300000: _Foot_V2:Group1
+    2300002: _Foot_V2:Group2
+    2300004: _Foot_V2:Group3
+    2300006: _Foot_V2:ZBrush_defualt_group
+    2300008: _Hair_V2:Group11706
+    2300010: _Head_V2:Group1
+    2300012: _Head_V2:Group2
+    2300014: _Head_V2:Group3
+    2300016: _Head_V2:Group4
+    2300018: _Head_V2:ZBrush_defualt_group
+    2300020: _Lower_V2:Group1
+    2300022: _Lower_V2:ZBrush_defualt_group
+    2300024: _Upper_V2:Group2
+    2300026: Group3
+    2300028: pCylinder1
+    2300030: pCylinder2
+    3300000: _Foot_V2:Group1
+    3300002: _Foot_V2:Group2
+    3300004: _Foot_V2:Group3
+    3300006: _Foot_V2:ZBrush_defualt_group
+    3300008: _Hair_V2:Group11706
+    3300010: _Head_V2:Group1
+    3300012: _Head_V2:Group2
+    3300014: _Head_V2:Group3
+    3300016: _Head_V2:Group4
+    3300018: _Head_V2:ZBrush_defualt_group
+    3300020: _Lower_V2:Group1
+    3300022: _Lower_V2:ZBrush_defualt_group
+    3300024: _Upper_V2:Group2
+    3300026: Group3
+    3300028: pCylinder1
+    3300030: pCylinder2
+    4300000: _Foot_V2:Group1
+    4300002: _Foot_V2:Group2
+    4300004: _Foot_V2:Group3
+    4300006: _Foot_V2:ZBrush_defualt_group
+    4300008: _Hair_V2:Group11706
+    4300010: _Head_V2:Group1
+    4300012: _Head_V2:Group2
+    4300014: _Head_V2:Group3
+    4300016: _Head_V2:Group4
+    4300018: _Head_V2:ZBrush_defualt_group
+    4300020: _Lower_V2:Group1
+    4300022: _Lower_V2:ZBrush_defualt_group
+    4300024: _Upper_V2:Group2
+    4300026: Group3
+    4300028: pCylinder1
+    4300030: pCylinder2
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: '
+
+      Imported file ''S_Boo'' conversion failed: Required human bone ''Hips'' not
+      found
+
+
+'
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton:
+    - name: S_Boo(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Foot_V2:Group1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Foot_V2:Group2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Foot_V2:Group3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Foot_V2:ZBrush_defualt_group
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Hair_V2:Group11706
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Head_V2:Group1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Head_V2:Group2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Head_V2:Group3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Head_V2:Group4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Head_V2:ZBrush_defualt_group
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Lower_V2:Group1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Lower_V2:ZBrush_defualt_group
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: _Upper_V2:Group2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Group3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: pCylinder1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: pCylinder2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
