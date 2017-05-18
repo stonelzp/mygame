@@ -57,19 +57,13 @@ public class PlayerController : MonoBehaviour
 //	private uint status_dead = 32768;
 //1000 0000 0000 0000
 
-	//Rotation
-	//private Transform rotation_right=new;
-
-
 	//PlayerStatue  0000 0000
 	private uint PlayerStatus = 0;
 	//can the animation be interrupted?
-	private bool interruption = true;
+	//private bool interruption = true;
+
 	//the interval between the behavior
 	private float interval=0.0f;
-
-
-
 
 	// Use this for initialization
 	void Start ()
@@ -96,12 +90,8 @@ public class PlayerController : MonoBehaviour
 
 
 		}
-	
-//		//check
-//		check_animation_interrupted ();
-
-
-		//
+			
+		//time controll,some animation can not be interrupted
 		if(interval>0){
 			interval-=Time.deltaTime;
 		}
@@ -113,19 +103,6 @@ public class PlayerController : MonoBehaviour
 		Debug.Log (PlayerStatus);
 		//camera
 	}
-	//check the animation can be interrupted or cant
-//	void check_animation_interrupted(){
-//		
-//		if(AnimationPlay.IsPlaying("Normal_Idle")){
-//			interruption = true;
-//		}else if(AnimationPlay.IsPlaying("Battle_Run")){
-//			interruption=true;
-//		}else if(AnimationPlay.IsPlaying("Battle_Idle")){
-//			interruption=true;
-//		}
-//	}
-
-
 
 	void playAnimation(string AnimationName){
 		switch (AnimationName) {
@@ -197,11 +174,6 @@ public class PlayerController : MonoBehaviour
 	//player action controller
 	void statuscontroller ()
 	{
-		//PlayerStatus = (uint)(PlayerStatus | direction_value);
-//		if(PlayerStatus==0){
-//			PlayerRigidbody.velocity = velocity_zero;
-//		}
-
 		//check is lock status
 		if (Input.GetKeyDown (KeyCode.L)) {
 			if ((PlayerStatus & status_lock) == status_lock) {
@@ -237,8 +209,14 @@ public class PlayerController : MonoBehaviour
 			PlayerStatus = (uint)(PlayerStatus | status_battle);
 			playAnimation ("Run_Attack");
 		}
+		//check is jumping?
+		if(Input.GetKeyDown(KeyCode.Space)){
+			Debug.Log ("Jump");
+			//PlayerStatus = (uint)(PlayerStatus | status_jump);
+			//Invoke ("setstatus_jump_to0",(AnimationPlay ["Jump"].length / AnimationPlay ["Jump"].speed) * 0.8f);
+			//PlayerRigidbody.AddForce (new Vector3(0.0f,3.0f,0.0f));
+		}
 
-			
 
 		//check is moving?
 		if (Input.GetKey (KeyCode.D)) {
@@ -284,24 +262,7 @@ public class PlayerController : MonoBehaviour
 //
 		if(interval<=0){
 			movecontroller();
-		}
-		//movecontroller();
-
-
-		//check is jumping?
-		if(Input.GetKeyDown(KeyCode.Space)){
-			Debug.Log ("Jump");
-			//PlayerStatus = (uint)(PlayerStatus | status_jump);
-			//Invoke ("setstatus_jump_to0",(AnimationPlay ["Jump"].length / AnimationPlay ["Jump"].speed) * 0.8f);
-			//PlayerRigidbody.AddForce (new Vector3(0.0f,3.0f,0.0f));
-		}
-
-
-
-
-
-
-
+		}	
 		//this frame status complete then show animation
 
 	}
@@ -349,8 +310,6 @@ public class PlayerController : MonoBehaviour
 				Debug.Log("not move");
 				break;
 			}
-
-
 		} else {
 			switch (movement_status) {
 			case 0:
@@ -441,7 +400,6 @@ public class PlayerController : MonoBehaviour
 				break;
 
 			}
-
 			if (PlayerRigidbody.velocity == velocity_zero) {
 				if ((PlayerStatus & status_battle) == status_battle) {
 					playAnimation ("Battle_Idle");
@@ -462,14 +420,10 @@ public class PlayerController : MonoBehaviour
 					} else {
 						playAnimation ("Normal_Walk");
 					}
-
 				}
 			}
 				
 		}
-
-
-
 	}
 
 	//lock status movecontroller
@@ -601,115 +555,5 @@ public class PlayerController : MonoBehaviour
 
 		}
 	}
-
-//
-//
-//	//player animation controller
-//	void animationplaycontroller ()
-//	{
-//		//Animation play
-//
-//		//move animation
-//		if (PlayerRigidbody.velocity == velocity_zero) {//Idle
-//			
-//			if ((PlayerStatus & status_battle_11) == status_battle_11) {
-//				AnimationPlay ["Battle_Idle"].wrapMode = WrapMode.Loop;
-//				AnimationPlay.CrossFade ("Battle_Idle", 0.3f);
-//			} else if ((PlayerStatus & status_battle_01) == status_battle_01) {
-//				AnimationPlay ["Battle_In"].wrapMode = WrapMode.Once;
-//				AnimationPlay.CrossFade ("Battle_In", 0.3f);
-//				//Debug.Log ("01:" + PlayerStatus);
-//			} else if ((PlayerStatus & status_battle_10) == status_battle_10) {
-//				AnimationPlay ["Battle_Out"].wrapMode = WrapMode.Once;
-//				AnimationPlay.CrossFade ("Battle_Out", 0.3f);
-//				Debug.Log ("00:" + PlayerStatus);
-//			} else if ((PlayerStatus & status_battle_11) == status_zero) {
-//				//Normal style Idle
-//				AnimationPlay ["Normal_Idle"].wrapMode = WrapMode.Loop;
-//				AnimationPlay.CrossFade ("Normal_Idle", 0.3f);
-//			}
-//
-//		} 
-//		else {// not Idle
-//			//check is in battle
-//			if ((PlayerStatus & status_battle_11) == status_battle_11) {
-//				//check is lock status
-//				if ((PlayerStatus & status_lock) == status_lock) {
-//		           switch((uint)(PlayerStatus & direction_mask)){
-//					case 1:
-//						AnimationPlay.CrossFade ("Battle_Run_R", 0.3f);
-//						break;
-//					case 2:
-//						AnimationPlay.CrossFade ("Battle_Run_L", 0.3f);
-//						break;
-//					case 4:
-//						AnimationPlay.CrossFade ("Battle_Walk", 0.3f);
-//						break;
-//					case 8:
-//						AnimationPlay.CrossFade ("Battle_Run_B", 0.3f);
-//						break;
-//					default:
-//						break;
-//					}
-//				} else {
-//
-//					if ((PlayerStatus & status_run) > 0) {
-//						//run animation
-//						AnimationPlay.CrossFade ("Battle_Run", 0.3f);
-//
-//					} else {
-//						//normal style walk
-//						AnimationPlay.CrossFade ("Battle_Walk", 0.3f);
-//					}
-//				}
-//			} 
-//			else if((PlayerStatus & status_battle_11) == status_zero){
-//				if ((PlayerStatus & status_run) > 0) {
-//					//run animation
-//					AnimationPlay.CrossFade ("Normal_Run", 0.3f);
-//
-//				} else {
-//					//normal style walk
-//					AnimationPlay.CrossFade ("Normal_Walk", 0.3f);
-//				}
-//			}
-//
-//		}
-
-//		//jump animation
-//		if((PlayerStatus&status_jump)==status_jump){
-//			AnimationPlay ["Jump"].wrapMode = WrapMode.Once;
-//			AnimationPlay.CrossFade ("Jump",0.3f);
-//		}
-//		//run_attack animation
-//		if ((PlayerStatus & status_run_attack) == status_run_attack) {
-//			AnimationPlay ["Run_Attack"].wrapMode = WrapMode.Once;
-//			AnimationPlay.CrossFade ("Run_Attack", 0.3f);
-//			AnimationPlay.CrossFadeQueued ("Battle_Idle",0.3f);
-//		}
-
-
-	//}
-
-//
-//	//set PlayerStatus to Battle status
-//	void setstatus_battle_to11 ()
-//	{
-//		Debug.Log ("set status to 11");
-//		PlayerStatus = (uint)(PlayerStatus | status_battle_11);
-//	}
-//	//set PlayerStatus to Normal status
-//	void setstatus_battle_to00 ()
-//	{
-//		Debug.Log ("set status to 00");
-//		PlayerStatus = (uint)(PlayerStatus & (uint)~status_battle_11);
-//	}
-//	//set PlayerStatus jump to 0 (ground) 
-//	void setstatus_jump_to0(){
-//		PlayerStatus = (uint)(PlayerStatus & (uint)~status_jump);
-//	}
-//	//set status run_attack to 0
-//	void setstatus_runattack_to0(){
-//		PlayerStatus = (uint)(PlayerStatus & (uint)~status_run_attack);
-	//}
+		
 }
