@@ -165,7 +165,12 @@ public class PlayerController : MonoBehaviour
 			//the animation can not be interrupted
 			interval = (AnimationPlay ["Battle_Out"].length / AnimationPlay ["Battle_Out"].speed) * 0.85f;
 			break;
-
+		case "Jump":
+			AnimationPlay ["Jump"].wrapMode = WrapMode.Once;
+			AnimationPlay.CrossFade ("Jump", 0.3f);
+			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
+			interval=(AnimationPlay ["Jump"].length / AnimationPlay ["Jump"].speed) * 0.95f;
+			break;
 		default:
 			break;
 		}
@@ -211,7 +216,9 @@ public class PlayerController : MonoBehaviour
 		}
 		//check is jumping?
 		if(Input.GetKeyDown(KeyCode.Space)){
-			Debug.Log ("Jump");
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("Jump");
+			}
 			//PlayerStatus = (uint)(PlayerStatus | status_jump);
 			//Invoke ("setstatus_jump_to0",(AnimationPlay ["Jump"].length / AnimationPlay ["Jump"].speed) * 0.8f);
 			//PlayerRigidbody.AddForce (new Vector3(0.0f,3.0f,0.0f));
