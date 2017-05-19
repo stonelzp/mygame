@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
 //		}
 		//play the default animation
 		AnimationPlay.playAutomatically=true;
+		interval = 0.0f;
 
 
 	}
@@ -171,6 +172,70 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
 			interval=(AnimationPlay ["Jump"].length / AnimationPlay ["Jump"].speed) * 0.95f;
 			break;
+		case "Dodge":
+			AnimationPlay ["Dodge"].wrapMode = WrapMode.Once;
+			AnimationPlay.CrossFade ("Dodge", 0.3f);
+			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
+			interval=(AnimationPlay ["Dodge"].length / AnimationPlay ["Dodge"].speed) * 0.98f;
+			break;
+		case "Damage01":
+			AnimationPlay ["Damage01"].wrapMode = WrapMode.Once;
+			//AnimationPlay ["Damage01"].speed = f;
+			AnimationPlay.CrossFade ("Damage01", 0.3f);
+			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
+			interval=(AnimationPlay ["Damage01"].length / AnimationPlay ["Damage01"].speed) * 1.0f;
+			break;
+		case "Damage02":
+			AnimationPlay ["Damage02"].wrapMode = WrapMode.Once;
+			AnimationPlay.CrossFade ("Damage02", 0.3f);
+			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
+			interval=(AnimationPlay ["Damage02"].length / AnimationPlay ["Damage02"].speed) * 1.0f;
+			break;
+		case "Damage03":
+			AnimationPlay ["Damage03"].wrapMode = WrapMode.Once;
+			AnimationPlay.CrossFade ("Damage03", 0.3f);
+			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
+			interval=(AnimationPlay ["Damage03"].length / AnimationPlay ["Damage03"].speed) * 1.0f;
+			break;
+		case "Dead":
+			AnimationPlay ["Dead"].wrapMode = WrapMode.Once;
+			AnimationPlay.CrossFade ("Dead", 0.3f);
+			//AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
+			interval=20.0f;
+			break;
+		case "Level_Up":
+			AnimationPlay ["Level_Up"].wrapMode = WrapMode.Once;
+			AnimationPlay.CrossFade ("Level_Up", 0.3f);
+			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
+			interval=(AnimationPlay ["Level_Up"].length / AnimationPlay ["Level_Up"].speed) * 0.98f;
+			break;
+		case "Skill01":
+			AnimationPlay ["Skill01"].wrapMode = WrapMode.Once;
+			AnimationPlay.CrossFade ("Skill01", 0.3f);
+			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
+			interval=(AnimationPlay ["Skill01"].length / AnimationPlay ["Skill01"].speed) * 0.98f;
+			break;
+		case "Skill02":
+			AnimationPlay ["Skill02"].wrapMode = WrapMode.Once;
+			AnimationPlay.CrossFade ("Skill02", 0.3f);
+			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
+			interval=(AnimationPlay ["Skill02"].length / AnimationPlay ["Skill02"].speed) * 0.98f;
+			break;
+		case "Skill03":
+			AnimationPlay ["Skill03"].wrapMode = WrapMode.Once;
+			AnimationPlay.CrossFade ("Skill03", 0.3f);
+			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
+			interval=(AnimationPlay ["Skill03"].length / AnimationPlay ["Skill03"].speed) * 0.98f;
+			break;
+		case "MagicSkill01":
+			AnimationPlay ["MagicAttack_B"].wrapMode = WrapMode.Once;
+			AnimationPlay ["MagicAttack_M"].wrapMode = WrapMode.Once;
+			AnimationPlay.CrossFade ("MagicAttack_B", 0.0f);
+			AnimationPlay.CrossFadeQueued ("MagicAttack_M", 0.1f);
+			AnimationPlay.CrossFadeQueued ("MagicAttack_E", 0.1f);
+			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.0f);
+			interval=(AnimationPlay ["MagicAttack_B"].length / AnimationPlay ["MagicAttack_B"].speed + AnimationPlay ["MagicAttack_M"].length / AnimationPlay ["MagicAttack_M"].speed + AnimationPlay ["MagicAttack_E"].length / AnimationPlay ["MagicAttack_E"].speed);
+			break;
 		default:
 			break;
 		}
@@ -219,11 +284,61 @@ public class PlayerController : MonoBehaviour
 			if((PlayerStatus&status_battle)==status_battle){
 				playAnimation ("Jump");
 			}
-			//PlayerStatus = (uint)(PlayerStatus | status_jump);
-			//Invoke ("setstatus_jump_to0",(AnimationPlay ["Jump"].length / AnimationPlay ["Jump"].speed) * 0.8f);
-			//PlayerRigidbody.AddForce (new Vector3(0.0f,3.0f,0.0f));
+		}
+		//check dodge
+		if(Input.GetKeyDown(KeyCode.Q)){
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("Dodge");
+			}
+		}
+		//check is damaged?
+		if(Input.GetKeyDown(KeyCode.Alpha1)){
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("Damage01");
+			}
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha2)){
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("Damage02");
+			}
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha3)){
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("Damage03");
+			}
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha0)){
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("Dead");
+			}
 		}
 
+		if(Input.GetKeyDown(KeyCode.U)){
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("Level_Up");
+			}
+		}
+		//skill 
+		if(Input.GetKeyDown(KeyCode.F)){
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("Skill03");
+			}
+		}
+		if(Input.GetKeyDown(KeyCode.J)){
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("Skill01");
+			}
+		}
+		if(Input.GetKeyDown(KeyCode.K)){
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("Skill02");
+			}
+		}
+		if(Input.GetKeyDown(KeyCode.M)){
+			if((PlayerStatus&status_battle)==status_battle){
+				playAnimation ("MagicSkill01");
+			}
+		}
 
 		//check is moving?
 		if (Input.GetKey (KeyCode.D)) {
@@ -256,17 +371,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-
-//		//check dodge
-//		if (Input.GetKeyDown (KeyCode.Q)) {
-//			//Q avoid skill action status
-//
-//			//gameObject.GetComponent<Animation> ().CrossFade ("avoid", 0.3f);
-//		}
-//		if (Input.GetKeyUp (KeyCode.Q)) {
-//		
-//		}
-//
 		if(interval<=0){
 			movecontroller();
 		}	
