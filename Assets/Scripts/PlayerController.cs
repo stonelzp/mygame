@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 	private uint status_lock = 64;//0100 0000
 	private uint status_lock_battle=96;//0110 0000
 	private uint status_run_attack=128;//1000 0000
+	private uint status_dodge=256;//0001 0000 0000
 //	private uint status_jump = 256;//0001 0000 0000
 //	private uint status_run_attack=512;//0010 0000 0000
 
@@ -72,11 +73,14 @@ public class PlayerController : MonoBehaviour
 		if(interval<=0.0f){
 			statuscontroller ();
 		}
-		//skill run attack movement controll
+		//skill run attack movement controller
 		if((PlayerStatus&status_run_attack)==status_run_attack && interval>0.0f){
 			run_attack_movement ();
 		}
-
+		//skill dodge movement controller
+		if((PlayerStatus&status_dodge)==status_dodge && interval>0.0f){
+			dodge_movement ();
+		}
 
 
 
@@ -229,8 +233,7 @@ public class PlayerController : MonoBehaviour
 	}
 
 	//player action controller
-	void statuscontroller ()
-	{
+	void statuscontroller (){
 		//check is lock status
 		if (Input.GetKeyDown (KeyCode.L)) {
 			if ((PlayerStatus & status_lock) == status_lock) {
@@ -273,6 +276,7 @@ public class PlayerController : MonoBehaviour
 		//check dodge
 		if(Input.GetKeyDown(KeyCode.Q)){
 			if((PlayerStatus&status_battle)==status_battle){
+				PlayerStatus = (uint)(PlayerStatus | status_dodge);
 				playAnimation ("Dodge");
 			}
 		}
@@ -635,8 +639,10 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	//run attack movement
+	//run attack movement controller
 	void run_attack_movement(){
+		//warn:it should not exit number 0.75
+		//
 		if (interval <= 0.75f) {
 			PlayerStatus = (uint)(PlayerStatus & (uint)~status_run_attack);
 		}
@@ -669,6 +675,44 @@ public class PlayerController : MonoBehaviour
 		default:
 			break;
 		}
+	}
+	//dodge movement controller
+	void dodge_movement(){
+		//warn:it should not exit number 0.75
+		//
+		if(interval>0.2f){
+			PlayerStatus = (uint)(PlayerStatus & (uint)~status_dodge);
+		}
+		switch(direction_value_now){
+		case 1:
+			PlayerRigidbody.velocity = new Vector3 (-4.0f,0.0f,0.0f);
+			break;
+		case 2:
+			PlayerRigidbody.velocity = new Vector3 (4.0f,0.0f,0.0f);
+			break;
+		case 4:
+			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,-4.0f);
+			break;
+		case 5:
+			PlayerRigidbody.velocity = new Vector3 (-2.828f,0.0f,-2.828f);
+			break;
+		case 6:
+			PlayerRigidbody.velocity = new Vector3 (2.828f,0.0f,-2.828f);
+			break;
+		case 8:
+			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,4.0f);
+			break;
+		case 9:
+			PlayerRigidbody.velocity = new Vector3 (-2.828f,0.0f,2.828f);
+			break;
+		case 10:
+			PlayerRigidbody.velocity = new Vector3 (2.828f,0.0f,2.828f);
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 		
 }
