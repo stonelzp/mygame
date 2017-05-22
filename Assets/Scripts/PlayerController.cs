@@ -41,8 +41,8 @@ public class PlayerController : MonoBehaviour
 	private uint status_lock_battle=96;//0110 0000
 	private uint status_run_attack=128;//1000 0000
 	private uint status_dodge=256;//0001 0000 0000
-//	private uint status_jump = 256;//0001 0000 0000
-//	private uint status_run_attack=512;//0010 0000 0000
+	private uint status_attack_skill02=512;//0010 0000 0000
+
 
 
 
@@ -81,7 +81,10 @@ public class PlayerController : MonoBehaviour
 		if((PlayerStatus&status_dodge)==status_dodge && interval>0.0f){
 			dodge_movement ();
 		}
-
+		//attack skill02  movement controller
+		if((PlayerStatus&status_attack_skill02)==status_attack_skill02 && interval>0.0f){
+			attack_movement ();
+		}
 
 
 			
@@ -92,7 +95,6 @@ public class PlayerController : MonoBehaviour
 	}
 	void LateUpdate ()
 	{
-		Debug.Log (direction_value_now);
 		//camera
 	}
 
@@ -320,6 +322,7 @@ public class PlayerController : MonoBehaviour
 		}
 		if(Input.GetKeyDown(KeyCode.K)){
 			if((PlayerStatus&status_battle)==status_battle){
+				PlayerStatus = (uint)(PlayerStatus | status_attack_skill02);
 				playAnimation ("Skill02");
 			}
 		}
@@ -714,5 +717,39 @@ public class PlayerController : MonoBehaviour
 		}
 		
 	}
-		
+	//attack movement controller
+	void attack_movement(){
+		if (interval > 0.2f) {
+			PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill02);
+		}
+		switch (direction_value_now) {
+		case 1:
+			PlayerRigidbody.velocity = new Vector3 (3.0f,0.0f,0.0f);
+			break;
+		case 2:
+			PlayerRigidbody.velocity = new Vector3 (-3.0f,0.0f,0.0f);
+			break;
+		case 4:
+			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,3.0f);
+			break;
+		case 5:
+			PlayerRigidbody.velocity = new Vector3 (1.732f,0.0f,1.732f);
+			break;
+		case 6:
+			PlayerRigidbody.velocity = new Vector3 (-1.732f,0.0f,1.732f);
+			break;
+		case 8:
+			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,-3.0f);
+			break;
+		case 9:
+			PlayerRigidbody.velocity = new Vector3 (1.732f,0.0f,-1.732f);
+			break;
+		case 10:
+			PlayerRigidbody.velocity = new Vector3 (-1.732f,0.0f,-1.732f);
+			break;
+
+		default:
+			break;
+		}
+	}
 }
