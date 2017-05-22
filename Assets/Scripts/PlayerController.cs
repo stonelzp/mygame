@@ -39,23 +39,11 @@ public class PlayerController : MonoBehaviour
 	private uint status_battle = 32;//0010 0000
 	private uint status_lock = 64;//0100 0000
 	private uint status_lock_battle=96;//0110 0000
+	private uint status_run_attack=128;//1000 0000
 //	private uint status_jump = 256;//0001 0000 0000
 //	private uint status_run_attack=512;//0010 0000 0000
 
 
-
-//	private uint status_levelup = 128;
-////1000 0000
-//	private uint status_attack = 768;
-////0011 0000 0000
-//	private uint status_magic = 3072;
-////1100 0000 0000
-//	private uint status_damage = 12288;
-////0011 0000 0000 0000
-//	private uint status_avoid = 16384;
-////0100 0000 0000 0000
-//	private uint status_dead = 32768;
-//1000 0000 0000 0000
 
 	//PlayerStatue  0000 0000
 	private uint PlayerStatus = 0;
@@ -72,13 +60,9 @@ public class PlayerController : MonoBehaviour
 		AnimationPlay = gameObject.GetComponent<Animation> ();
 		//AnimationPlay.Play ("Normal_Run");
 		PlayerRigidbody = gameObject.GetComponent<Rigidbody> ();
-//		foreach (AnimationState anim in AnimationPlay) {
-//			Debug.Log (anim.name);
-//		}
 		//play the default animation
 		AnimationPlay.playAutomatically=true;
 		interval = 0.0f;
-
 
 	}
 	// Update is called once per frame
@@ -87,21 +71,24 @@ public class PlayerController : MonoBehaviour
 		//can the animation be interrupted?
 		if(interval<=0.0f){
 			statuscontroller ();
-			//movecontroller ();
-
-
 		}
+		//skill run attack movement controll
+		if((PlayerStatus&status_run_attack)==status_run_attack && interval>0.0f){
+			run_attack_movement ();
+		}
+
+
+
+
 			
 		//time controll,some animation can not be interrupted
 		if(interval>0){
 			interval-=Time.deltaTime;
 		}
 	}
-
 	void LateUpdate ()
 	{
-		Debug.Log ("PlayerStatus:");
-		Debug.Log (PlayerStatus);
+		Debug.Log (direction_value_now);
 		//camera
 	}
 
@@ -254,13 +241,10 @@ public class PlayerController : MonoBehaviour
 		}
 		//check is running?
 		if (Input.GetKey (KeyCode.LeftShift)) {
-			//Debug.Log(PlayerStatus);
 			PlayerStatus = (uint)(PlayerStatus | status_run);//example:0001 0000
-			//Debug.Log(PlayerStatus);
 		}
 		else{
 			PlayerStatus = (uint)(PlayerStatus & (uint)~status_run);
-			//Debug.Log(PlayerStatus);
 		}
 
 		//check is battle status
@@ -277,6 +261,7 @@ public class PlayerController : MonoBehaviour
 		//
 		if(Input.GetKeyDown(KeyCode.I)){
 			PlayerStatus = (uint)(PlayerStatus | status_battle);
+			PlayerStatus = (uint)(PlayerStatus | status_run_attack);
 			playAnimation ("Run_Attack");
 		}
 		//check is jumping?
@@ -392,33 +377,24 @@ public class PlayerController : MonoBehaviour
 				break;
 			case 1:
 				//move to right
-				Debug.Log ("move to right");
-				Debug.Log (direction_value_now);
 				lock_in_movementcontroller (direction_right);
 				playAnimation ("Battle_Run_R");
 				break;
 			case 2:
-				Debug.Log("move to left");
-				Debug.Log (direction_value_now);
 				lock_in_movementcontroller (direction_left);
 				playAnimation ("Battle_Run_L");
 
 				break;
 			case 4:
-				Debug.Log("move to up");
-				Debug.Log (direction_value_now);
 				lock_in_movementcontroller (direction_up);
 				playAnimation ("Battle_Walk");
 
 				break;
 			case 8:
-				Debug.Log("move to down");
-				Debug.Log (direction_value_now);
 				lock_in_movementcontroller (direction_down);
 				playAnimation ("Battle_Run_B");
 				break;
 			default:
-				Debug.Log("not move");
 				break;
 			}
 		} else {
@@ -542,7 +518,6 @@ public class PlayerController : MonoBehaviour
 		//uint rotation_y=(uint)(transform.rotation.y);
 		switch(direction_value_now){
 		case 4://direction up
-			Debug.Log ("fangxiang1");
 			if (direction == direction_right) {
 				PlayerRigidbody.velocity = velocity_right;
 			}
@@ -557,7 +532,6 @@ public class PlayerController : MonoBehaviour
 			}
 			break;
 		case 5://direction right-up
-			Debug.Log ("fangxiang2");
 			if (direction == direction_right) {
 				PlayerRigidbody.velocity = velocity_right_down;
 			}
@@ -572,7 +546,6 @@ public class PlayerController : MonoBehaviour
 			}
 			break;
 		case 1://direction right
-			Debug.Log ("fangxiang3");
 			if (direction == direction_right) {
 				PlayerRigidbody.velocity = velocity_down;
 			}
@@ -587,7 +560,6 @@ public class PlayerController : MonoBehaviour
 			}
 			break;
 		case 9://direction right_down
-			Debug.Log ("fangxiang4");
 			if (direction == direction_right) {
 				PlayerRigidbody.velocity = velocity_left_down;
 			}
@@ -602,7 +574,6 @@ public class PlayerController : MonoBehaviour
 			}
 			break;
 		case 8://direction down
-			Debug.Log ("fangxiang5");
 			if (direction == direction_right) {
 				PlayerRigidbody.velocity = velocity_left;
 			}
@@ -617,7 +588,6 @@ public class PlayerController : MonoBehaviour
 			}
 			break;
 		case 10://direction left_down
-			Debug.Log ("fangxiang6");
 			if (direction == direction_right) {
 				PlayerRigidbody.velocity = velocity_left_up;
 			}
@@ -632,7 +602,6 @@ public class PlayerController : MonoBehaviour
 			}
 			break;
 		case 2://direction left
-			Debug.Log ("fangxiang7");
 			if (direction == direction_right) {
 				PlayerRigidbody.velocity = velocity_up;
 			}
@@ -647,7 +616,6 @@ public class PlayerController : MonoBehaviour
 			}
 			break;
 		case 6://direction left_up
-			Debug.Log ("fangxiang8");
 			if (direction == direction_right) {
 				PlayerRigidbody.velocity = velocity_right_up;
 			}
@@ -664,6 +632,42 @@ public class PlayerController : MonoBehaviour
 		default:
 			break;
 
+		}
+	}
+
+	//run attack movement
+	void run_attack_movement(){
+		if (interval <= 0.75f) {
+			PlayerStatus = (uint)(PlayerStatus & (uint)~status_run_attack);
+		}
+		switch (direction_value_now) {
+		case 1:
+			PlayerRigidbody.velocity = new Vector3 (2.5f,0.0f,0.0f);
+			break;
+		case 2:
+			PlayerRigidbody.velocity = new Vector3 (-2.5f,0.0f,0.0f);
+			break;
+		case 4:
+			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,2.5f);
+			break;
+		case 5:
+			PlayerRigidbody.velocity = new Vector3 (1.58f,0.0f,1.58f);
+			break;
+		case 6:
+			PlayerRigidbody.velocity = new Vector3 (-1.58f,0.0f,1.58f);
+			break;
+		case 8:
+			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,-2.5f);
+			break;
+		case 9:
+			PlayerRigidbody.velocity = new Vector3 (1.58f,0.0f,-1.58f);
+			break;
+		case 10:
+			PlayerRigidbody.velocity = new Vector3 (-1.58f,0.0f,-1.58f);
+			break;
+
+		default:
+			break;
 		}
 	}
 		
