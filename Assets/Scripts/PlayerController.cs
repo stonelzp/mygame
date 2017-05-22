@@ -42,14 +42,13 @@ public class PlayerController : MonoBehaviour
 	private uint status_run_attack=128;//1000 0000
 	private uint status_dodge=256;//0001 0000 0000
 	private uint status_attack_skill02=512;//0010 0000 0000
+	private uint status_jump=1024;//0100 0000 0000
 
 
 
 
 	//PlayerStatue  0000 0000
 	private uint PlayerStatus = 0;
-	//can the animation be interrupted?
-	//private bool interruption = true;
 
 	//the interval between the behavior
 	private float interval=0.0f;
@@ -272,6 +271,7 @@ public class PlayerController : MonoBehaviour
 		//check is jumping?
 		if(Input.GetKeyDown(KeyCode.Space)){
 			if((PlayerStatus&status_battle)==status_battle){
+				PlayerStatus = (uint)(PlayerStatus | status_jump);
 				playAnimation ("Jump");
 			}
 		}
@@ -751,5 +751,9 @@ public class PlayerController : MonoBehaviour
 		default:
 			break;
 		}
+	}
+	//jump movement controller
+	void jump_movement(){
+		
 	}
 }
