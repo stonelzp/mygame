@@ -84,6 +84,10 @@ public class PlayerController : MonoBehaviour
 		if((PlayerStatus&status_attack_skill02)==status_attack_skill02 && interval>0.0f){
 			attack_movement ();
 		}
+		//jump movement controller
+		if((PlayerStatus&status_jump)==status_jump && interval>0.0f){
+			jump_movement ();
+		}
 
 
 			
@@ -369,8 +373,7 @@ public class PlayerController : MonoBehaviour
 		//this frame status complete then show animation
 
 	}
-
-
+		
 	//player move controller
 	void movecontroller ()
 	{	
@@ -754,6 +757,40 @@ public class PlayerController : MonoBehaviour
 	}
 	//jump movement controller
 	void jump_movement(){
-		
+		if (interval <= 1.0f) {
+			PlayerStatus=(uint)(PlayerStatus & (uint)~status_jump);
+		}
+		switch (direction_value_now) {
+		case 1:
+			PlayerRigidbody.velocity = new Vector3 (2.0f, 0.0f, 0.0f);
+			break;
+		case 2:
+			PlayerRigidbody.velocity = new Vector3 (-2.0f,0.0f,0.0f);
+			break;
+		case 4:
+			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,2.0f);
+			break;
+		case 5:
+			PlayerRigidbody.velocity = new Vector3 (2.828f,0.0f,2.828f);
+			break;
+		case 6:
+			PlayerRigidbody.velocity = new Vector3 (-2.828f,0.0f,2.828f);
+			break;
+		case 8:
+			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,-2.0f);
+			break;
+		case 9:
+			PlayerRigidbody.velocity = new Vector3 (2.828f,0.0f,-2.828f);
+			break;
+		case 10:
+			PlayerRigidbody.velocity = new Vector3 (-2.828f,0.0f,-2.828f);
+			break;
+		default:
+			break;
+		}
+		if ((PlayerStatus & status_run) == status_run) {
+			//if is running
+			PlayerRigidbody.velocity=PlayerRigidbody.velocity*1.3f;
+		}
 	}
 }
