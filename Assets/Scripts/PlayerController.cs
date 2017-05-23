@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
 	private uint status_dodge=256;//0001 0000 0000
 	private uint status_attack_skill02=512;//0010 0000 0000
 	private uint status_jump=1024;//0100 0000 0000
+	//private uint status_damage03=2048;//1000 0000 0000
 
 
 
@@ -88,6 +89,10 @@ public class PlayerController : MonoBehaviour
 		if((PlayerStatus&status_jump)==status_jump && interval>0.0f){
 			jump_movement ();
 		}
+		//damage movement controller
+//		if((PlayerStatus&status_damage03)==status_damage03 && interval>0.0f){
+//			damage_movement ();
+//		}
 
 
 			
@@ -299,6 +304,7 @@ public class PlayerController : MonoBehaviour
 		}
 		if(Input.GetKeyDown(KeyCode.Alpha3)){
 			if((PlayerStatus&status_battle)==status_battle){
+				//PlayerStatus = (uint)(PlayerStatus | status_damage03);
 				playAnimation ("Damage03");
 			}
 		}
@@ -793,4 +799,17 @@ public class PlayerController : MonoBehaviour
 			PlayerRigidbody.velocity=PlayerRigidbody.velocity*1.3f;
 		}
 	}
+//	//damage movement controller
+//	void damage_movement(){
+//		if (interval <= 0.2f) {
+//			PlayerStatus=(uint)(PlayerStatus & (uint)~status_damage03);
+//			switch (direction_value_now) {
+//			case 1:
+//				gameObject.transform.position=new Vector3(gameObject.transform.position.x-0.5f,gameObject.transform.position.y,gameObject.transform.position.z);
+//				break;
+//			default:
+//				break;
+//			}
+//		}
+	//}
 }
