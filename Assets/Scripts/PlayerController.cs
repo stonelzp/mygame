@@ -5,6 +5,9 @@ public class PlayerController : MonoBehaviour
 {
 	public Camera camera_normal;
 	public Camera camera_lock;
+	//partical system controll
+	public GameObject Particle01;
+	public GameObject Particle02;
 
 
 	private Animation AnimationPlay;
@@ -235,7 +238,15 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay.CrossFadeQueued ("MagicAttack_M", 0.1f);
 			AnimationPlay.CrossFadeQueued ("MagicAttack_E", 0.1f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.0f);
-			interval=(AnimationPlay ["MagicAttack_B"].length / AnimationPlay ["MagicAttack_B"].speed + AnimationPlay ["MagicAttack_M"].length / AnimationPlay ["MagicAttack_M"].speed + AnimationPlay ["MagicAttack_E"].length / AnimationPlay ["MagicAttack_E"].speed);
+			interval = (AnimationPlay ["MagicAttack_B"].length / AnimationPlay ["MagicAttack_B"].speed + AnimationPlay ["MagicAttack_M"].length / AnimationPlay ["MagicAttack_M"].speed + AnimationPlay ["MagicAttack_E"].length / AnimationPlay ["MagicAttack_E"].speed);
+			//magic particle
+			if (!Particle01.activeSelf) {
+				Particle01.SetActive (true);
+			} else {
+				Particle01.SetActive (false);
+				Particle01.SetActive (true);
+			}
+			Invoke ("particle02Play",1.5f);
 			break;
 		default:
 			break;
@@ -812,4 +823,12 @@ public class PlayerController : MonoBehaviour
 //			}
 //		}
 	//}
+	void particle02Play(){
+		if (!Particle02.activeSelf) {
+			Particle02.SetActive (true);
+		} else {
+			Particle02.SetActive (false);
+			Particle02.SetActive (true);
+		}
+	}
 }
