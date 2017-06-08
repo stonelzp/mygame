@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 	//partical system controll
 	public GameObject Particle01;
 	public GameObject Particle02;
+	public GameObject Particle03;
 
 
 	private Animation AnimationPlay;
@@ -229,7 +230,8 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay ["Skill03"].wrapMode = WrapMode.Once;
 			AnimationPlay.CrossFade ("Skill03", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
-			interval=(AnimationPlay ["Skill03"].length / AnimationPlay ["Skill03"].speed) * 0.98f;
+			interval = (AnimationPlay ["Skill03"].length / AnimationPlay ["Skill03"].speed) * 0.98f;
+			Invoke ("particle03Play",0.5f);
 			break;
 		case "MagicSkill01":
 			AnimationPlay ["MagicAttack_B"].wrapMode = WrapMode.Once;
@@ -541,126 +543,126 @@ public class PlayerController : MonoBehaviour
 	}
 
 	//lock status movecontroller
-	void lock_in_movementcontroller(uint direction){
-		//uint rotation_y=(uint)(transform.rotation.y);
-		switch(direction_value_now){
-		case 4://direction up
-			if (direction == direction_right) {
-				PlayerRigidbody.velocity = velocity_right;
-			}
-			if (direction == direction_left) {
-				PlayerRigidbody.velocity = velocity_left;
-			}
-			if (direction == direction_up) {
-				PlayerRigidbody.velocity = velocity_up;
-			}
-			if (direction == direction_down) {
-				PlayerRigidbody.velocity = velocity_down;
-			}
-			break;
-		case 5://direction right-up
-			if (direction == direction_right) {
-				PlayerRigidbody.velocity = velocity_right_down;
-			}
-			if (direction == direction_left) {
-				PlayerRigidbody.velocity = velocity_left_up;
-			}
-			if (direction == direction_up) {
-				PlayerRigidbody.velocity = velocity_right_up;
-			}
-			if (direction == direction_down) {
-				PlayerRigidbody.velocity = velocity_left_down;
-			}
-			break;
-		case 1://direction right
-			if (direction == direction_right) {
-				PlayerRigidbody.velocity = velocity_down;
-			}
-			if (direction == direction_left) {
-				PlayerRigidbody.velocity = velocity_up;
-			}
-			if (direction == direction_up) {
-				PlayerRigidbody.velocity = velocity_right;
-			}
-			if (direction == direction_down) {
-				PlayerRigidbody.velocity = velocity_left;
-			}
-			break;
-		case 9://direction right_down
-			if (direction == direction_right) {
-				PlayerRigidbody.velocity = velocity_left_down;
-			}
-			if (direction == direction_left) {
-				PlayerRigidbody.velocity = velocity_right_up;
-			}
-			if (direction == direction_up) {
-				PlayerRigidbody.velocity = velocity_right_down;
-			}
-			if (direction == direction_down) {
-				PlayerRigidbody.velocity = velocity_left_up;
-			}
-			break;
-		case 8://direction down
-			if (direction == direction_right) {
-				PlayerRigidbody.velocity = velocity_left;
-			}
-			if (direction == direction_left) {
-				PlayerRigidbody.velocity = velocity_right;
-			}
-			if (direction == direction_up) {
-				PlayerRigidbody.velocity = velocity_down;
-			}
-			if (direction == direction_down) {
-				PlayerRigidbody.velocity = velocity_up;
-			}
-			break;
-		case 10://direction left_down
-			if (direction == direction_right) {
-				PlayerRigidbody.velocity = velocity_left_up;
-			}
-			if (direction == direction_left) {
-				PlayerRigidbody.velocity = velocity_right_down;
-			}
-			if (direction == direction_up) {
-				PlayerRigidbody.velocity = velocity_left_down;
-			}
-			if (direction == direction_down) {
-				PlayerRigidbody.velocity = velocity_right_up;
-			}
-			break;
-		case 2://direction left
-			if (direction == direction_right) {
-				PlayerRigidbody.velocity = velocity_up;
-			}
-			if (direction == direction_left) {
-				PlayerRigidbody.velocity = velocity_down;
-			}
-			if (direction == direction_up) {
-				PlayerRigidbody.velocity = velocity_left;
-			}
-			if (direction == direction_down) {
-				PlayerRigidbody.velocity = velocity_right;
-			}
-			break;
-		case 6://direction left_up
-			if (direction == direction_right) {
-				PlayerRigidbody.velocity = velocity_right_up;
-			}
-			if (direction == direction_left) {
-				PlayerRigidbody.velocity = velocity_left_down;
-			}
-			if (direction == direction_up) {
-				PlayerRigidbody.velocity = velocity_left_up;
-			}
-			if (direction == direction_down) {
-				PlayerRigidbody.velocity = velocity_right_down;
-			}
-			break;
-		default:
-			break;
+		void lock_in_movementcontroller(uint direction){
+			//uint rotation_y=(uint)(transform.rotation.y);
+			switch(direction_value_now){
+			case 4://direction up
+				if (direction == direction_right) {
+					PlayerRigidbody.velocity = velocity_right;
+				}
+				if (direction == direction_left) {
+					PlayerRigidbody.velocity = velocity_left;
+				}
+				if (direction == direction_up) {
+					PlayerRigidbody.velocity = velocity_up;
+				}
+				if (direction == direction_down) {
+					PlayerRigidbody.velocity = velocity_down;
+				}
+				break;
+			case 5://direction right-up
+				if (direction == direction_right) {
+					PlayerRigidbody.velocity = velocity_right_down;
+				}
+				if (direction == direction_left) {
+					PlayerRigidbody.velocity = velocity_left_up;
+				}
+				if (direction == direction_up) {
+					PlayerRigidbody.velocity = velocity_right_up;
+				}
+				if (direction == direction_down) {
+					PlayerRigidbody.velocity = velocity_left_down;
+				}
+				break;
+			case 1://direction right
+				if (direction == direction_right) {
+					PlayerRigidbody.velocity = velocity_down;
+				}
+				if (direction == direction_left) {
+					PlayerRigidbody.velocity = velocity_up;
+				}
+				if (direction == direction_up) {
+					PlayerRigidbody.velocity = velocity_right;
+				}
+				if (direction == direction_down) {
+					PlayerRigidbody.velocity = velocity_left;
+				}
+				break;
+			case 9://direction right_down
+				if (direction == direction_right) {
+					PlayerRigidbody.velocity = velocity_left_down;
+				}
+				if (direction == direction_left) {
+					PlayerRigidbody.velocity = velocity_right_up;
+				}
+				if (direction == direction_up) {
+					PlayerRigidbody.velocity = velocity_right_down;
+				}
+				if (direction == direction_down) {
+					PlayerRigidbody.velocity = velocity_left_up;
+				}
+				break;
+			case 8://direction down
+				if (direction == direction_right) {
+					PlayerRigidbody.velocity = velocity_left;
+				}
+				if (direction == direction_left) {
+					PlayerRigidbody.velocity = velocity_right;
+				}
+				if (direction == direction_up) {
+					PlayerRigidbody.velocity = velocity_down;
+				}
+				if (direction == direction_down) {
+					PlayerRigidbody.velocity = velocity_up;
+				}
+				break;
+			case 10://direction left_down
+				if (direction == direction_right) {
+					PlayerRigidbody.velocity = velocity_left_up;
+				}
+				if (direction == direction_left) {
+					PlayerRigidbody.velocity = velocity_right_down;
+				}
+				if (direction == direction_up) {
+					PlayerRigidbody.velocity = velocity_left_down;
+				}
+				if (direction == direction_down) {
+					PlayerRigidbody.velocity = velocity_right_up;
+				}
+				break;
+			case 2://direction left
+				if (direction == direction_right) {
+					PlayerRigidbody.velocity = velocity_up;
+				}
+				if (direction == direction_left) {
+					PlayerRigidbody.velocity = velocity_down;
+				}
+				if (direction == direction_up) {
+					PlayerRigidbody.velocity = velocity_left;
+				}
+				if (direction == direction_down) {
+					PlayerRigidbody.velocity = velocity_right;
+				}
+				break;
+			case 6://direction left_up
+				if (direction == direction_right) {
+					PlayerRigidbody.velocity = velocity_right_up;
+				}
+				if (direction == direction_left) {
+					PlayerRigidbody.velocity = velocity_left_down;
+				}
+				if (direction == direction_up) {
+					PlayerRigidbody.velocity = velocity_left_up;
+				}
+				if (direction == direction_down) {
+					PlayerRigidbody.velocity = velocity_right_down;
+				}
+				break;
+			default:
+				break;
 
+			}
 		}
-	}
 
 	//run attack movement controller
 	void run_attack_movement(){
@@ -829,6 +831,14 @@ public class PlayerController : MonoBehaviour
 		} else {
 			Particle02.SetActive (false);
 			Particle02.SetActive (true);
+		}
+	}
+	void particle03Play(){
+		if (!Particle03.activeSelf) {
+			Particle03.SetActive (true);
+		} else {
+			Particle03.SetActive (false);
+			Particle03.SetActive (true);
 		}
 	}
 }
