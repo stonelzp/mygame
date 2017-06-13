@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: taozhuang_vfx_trail_10
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 6a3326650e9e574449cbdf4425f72707, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Blend_Texture
+        second:
+          m_Texture: {fileID: 2800000, guid: 2cffac39495d630418d86a39e9c3edc2, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Blend_Texture01
+        second:
+          m_Texture: {fileID: 2800000, guid: d5408633313bcd140959ce509e4af2fc, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MaskTex
+        second:
+          m_Texture: {fileID: 2800000, guid: b2e3075485469244c8c2313d89c34e61, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Offset
+        second:
+          m_Texture: {fileID: 2800000, guid: 15b747f57e92b5043bda966aec143c9a, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Alpha
+        second:
+          m_Texture: {fileID: 2800000, guid: a3fd364bff6591b4aadc8cc5675c99fb, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _InvFade
+        second: 0.01
+      data:
+        first:
+          name: _Speed01
+        second: -3
+      data:
+        first:
+          name: _Speed02
+        second: 2
+      data:
+        first:
+          name: _Lighten
+        second: 2.46
+      data:
+        first:
+          name: _LightenMain
+        second: 1.2
+      data:
+        first:
+          name: _Speed
+        second: -10
+      data:
+        first:
+          name: _Fresnel_Value
+        second: 0.17910449
+      data:
+        first:
+          name: _Gloss
+        second: 1
+      data:
+        first:
+          name: _Distortion
+        second: 1
+      data:
+        first:
+          name: _Speed00
+        second: 70
+    m_Colors:
+      data:
+        first:
+          name: _Color
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _TintColor
+        second: {r: 0.63432837, g: 0.81588566, b: 1, a: 1}
+      data:
+        first:
+          name: _Color01
+        second: {r: 1, g: 0.56643355, b: 0, a: 1}
+      data:
+        first:
+          name: _Color02
+        second: {r: 0.9701493, g: 0.9701493, b: 0.9701493, a: 1}
+      data:
+        first:
+          name: _Color03
+        second: {r: 1, g: 0.97620285, b: 0.57462686, a: 1}
