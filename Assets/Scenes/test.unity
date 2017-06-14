@@ -201,48 +201,6 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: a96689c30660e694f888cb20949ec9e3, type: 3}
---- !u!1001 &857129210
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400000, guid: 9d775f97ad21a7548955ef3c2b2aa436, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.48153967
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9d775f97ad21a7548955ef3c2b2aa436, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9d775f97ad21a7548955ef3c2b2aa436, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -3.127123
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9d775f97ad21a7548955ef3c2b2aa436, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9d775f97ad21a7548955ef3c2b2aa436, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9d775f97ad21a7548955ef3c2b2aa436, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9d775f97ad21a7548955ef3c2b2aa436, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9d775f97ad21a7548955ef3c2b2aa436, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 9d775f97ad21a7548955ef3c2b2aa436, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &921359178
 Prefab:
   m_ObjectHideFlags: 0
@@ -485,7 +443,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &2089049249 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 188608, guid: f3b7fa14852924e8e8430fedfebf8efb, type: 2}
