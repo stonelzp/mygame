@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue>
+	<scene-altar>
+		<body id="0">
+			<charactor>星白</charactor>
+			<value>小师妹，终于找到你了，你到这个地方是来做什么？</value>
+		</body>
+		<body id="1">
+			<charactor>星莲</charactor>
+			<value>哦哦，不知不觉就跑到这里来了，找我有什么事儿吗，师姐？</value>
+		</body>
+	</scene-altar>
+</dialogue>
