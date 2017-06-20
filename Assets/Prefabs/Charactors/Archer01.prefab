@@ -914,6 +914,7 @@ GameObject:
   - 4: {fileID: 400120}
   - 111: {fileID: 11100000}
   - 143: {fileID: 14300000}
+  - 95: {fileID: 9551630}
   m_Layer: 0
   m_Name: Archer01
   m_TagString: Untagged
@@ -1706,8 +1707,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100120}
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: -0.00000004371139}
-  m_LocalPosition: {x: -0.37081957, y: -0.47, z: 1.503554}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: -44.561405, y: 12.318662, z: 18.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400118}
@@ -1717,13 +1718,30 @@ Transform:
   - {fileID: 400110}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!95 &9551630
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100120}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e4da097f55c4f4f47ab2650fa7cf7ab7, type: 3}
+  m_Controller: {fileID: 9100000, guid: d484e2affd4de449c8d2147f85a09f5b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!111 &11100000
 Animation:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100120}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: d29096c64cf38ac4db1c04f4a0431aa5, type: 3}
   m_Animations:

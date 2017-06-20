@@ -7,7 +7,7 @@ public class OpacityController : MonoBehaviour {
 
 	//change the background opacity
 	void Awake () {
-		GetComponent<Image>().color=new Color(1f,1f,1f,0.6f);
+		GetComponent<Image>().color=new Color(1f,1f,1f,0.2f);
 	}
 	
 	// Update is called once per frame
