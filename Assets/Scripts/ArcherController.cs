@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// Archer controller is attach to GameObject Archer01
+/// </summary>
 public class ArcherController : MonoBehaviour {
 	private Animator ArcherAnimator;
 
@@ -11,6 +15,9 @@ public class ArcherController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		NPCNavigationAnimation();
+	}
+	private void NPCGetInput(){
 		if (Input.GetKeyDown (KeyCode.J)) {
 			ArcherAnimator.SetTrigger ("Attack1");
 		}
@@ -24,6 +31,15 @@ public class ArcherController : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.W)) {
 			ArcherAnimator.SetBool("Run",false);
 		}
-	
+	}
+
+
+	private void NPCNavigationAnimation(){
+		if (Mathf.Abs(GetComponent<Rigidbody> ().velocity.y) > 0.0f) {
+			ArcherAnimator.SetBool ("Run", true);
+		} else {
+			ArcherAnimator.SetBool ("Run", false);
+		}
+
 	}
 }

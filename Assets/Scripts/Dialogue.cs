@@ -13,7 +13,7 @@ public class Dialogue : MonoBehaviour {
 	private Text _textComponent;
 	private Text _textCharactor;
 
-	private float SecondsBetweenCharacters = 0.15f;
+	private float SecondsBetweenCharacters = 0.1f;
 	private int DialogueLength = 0;
 	private int CurrentDialogueIndex = 0;
 
