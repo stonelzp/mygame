@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
 // Shader created with Shader Forge v1.26 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
@@ -89,7 +91,7 @@ Shader "MK4/Mobile/Banner" {
                     o.ambientOrLightmapUV.zw = v.texcoord2.xy * unity_DynamicLightmapST.xy + unity_DynamicLightmapST.zw;
                 #endif
                 o.normalDir = UnityObjectToWorldNormal(v.normal);
-                o.tangentDir = normalize( mul( _Object2World, float4( v.tangent.xyz, 0.0 ) ).xyz );
+                o.tangentDir = normalize( mul( unity_ObjectToWorld, float4( v.tangent.xyz, 0.0 ) ).xyz );
                 o.bitangentDir = normalize(cross(o.normalDir, o.tangentDir) * v.tangent.w);
                 float4 _Mask_var = tex2Dlod(_Mask,float4(TRANSFORM_TEX(o.uv0, _Mask),0.0,0));
                 float4 node_7986 = _Time + _TimeEditor;
@@ -98,7 +100,7 @@ Shader "MK4/Mobile/Banner" {
                 float2 node_1396 = (o.uv0+node_7986.g*float2(-0.15,0));
                 float4 node_6172 = tex2Dlod(_VectorTexture,float4(TRANSFORM_TEX(node_1396, _VectorTexture),0.0,0));
                 v.vertex.xyz += (_Mask_var.rgb*(_VectorOffset.rgb+((_DistortPower*2.0+0.0)*(node_3600.rgb+(node_6172.rgb*_SmallDistortValue)))));
-                o.posWorld = mul(_Object2World, v.vertex);
+                o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 float3 lightColor = _LightColor0.rgb;
                 o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
                 UNITY_TRANSFER_FOG(o,o.pos);
@@ -221,7 +223,7 @@ Shader "MK4/Mobile/Banner" {
                 float2 node_1396 = (o.uv0+node_4537.g*float2(-0.15,0));
                 float4 node_6172 = tex2Dlod(_VectorTexture,float4(TRANSFORM_TEX(node_1396, _VectorTexture),0.0,0));
                 v.vertex.xyz += (_Mask_var.rgb*(_VectorOffset.rgb+((_DistortPower*2.0+0.0)*(node_3600.rgb+(node_6172.rgb*_SmallDistortValue)))));
-                o.posWorld = mul(_Object2World, v.vertex);
+                o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
                 TRANSFER_SHADOW_CASTER(o)
                 return o;
@@ -293,7 +295,7 @@ Shader "MK4/Mobile/Banner" {
                 float2 node_1396 = (o.uv0+node_9692.g*float2(-0.15,0));
                 float4 node_6172 = tex2Dlod(_VectorTexture,float4(TRANSFORM_TEX(node_1396, _VectorTexture),0.0,0));
                 v.vertex.xyz += (_Mask_var.rgb*(_VectorOffset.rgb+((_DistortPower*2.0+0.0)*(node_3600.rgb+(node_6172.rgb*_SmallDistortValue)))));
-                o.posWorld = mul(_Object2World, v.vertex);
+                o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 o.pos = UnityMetaVertexPosition(v.vertex, v.texcoord1.xy, v.texcoord2.xy, unity_LightmapST, unity_DynamicLightmapST );
                 return o;
             }
