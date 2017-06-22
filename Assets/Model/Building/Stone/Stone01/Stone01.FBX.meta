@@ -434,6 +434,87 @@ ModelImporter:
     4300156: Line57
     4300158: Cylinder12
     4300160: Cylinder13
+    6400000: Cylinder01
+    6400002: Cylinder02
+    6400004: Cylinder03
+    6400006: Cylinder04
+    6400008: Cylinder05
+    6400010: Cylinder06
+    6400012: Cylinder07
+    6400014: Cylinder08
+    6400016: Cylinder09
+    6400018: Cylinder10
+    6400020: Cylinder11
+    6400022: Cylinder12
+    6400024: Cylinder13
+    6400026: Line01
+    6400028: Line02
+    6400030: Line03
+    6400032: Line04
+    6400034: Line05
+    6400036: Line06
+    6400038: Line07
+    6400040: Line08
+    6400042: Line09
+    6400044: Line10
+    6400046: Line11
+    6400048: Line12
+    6400050: Line13
+    6400052: Line14
+    6400054: Line15
+    6400056: Line16
+    6400058: Line17
+    6400060: Line18
+    6400062: Line19
+    6400064: Line20
+    6400066: Line21
+    6400068: Line22
+    6400070: Line23
+    6400072: Line24
+    6400074: Line25
+    6400076: Line26
+    6400078: Line27
+    6400080: Line28
+    6400082: Line29
+    6400084: Line30
+    6400086: Line31
+    6400088: Line32
+    6400090: Line33
+    6400092: Line34
+    6400094: Line35
+    6400096: Line36
+    6400098: Line37
+    6400100: Line38
+    6400102: Line39
+    6400104: Line40
+    6400106: Line41
+    6400108: Line42
+    6400110: Line43
+    6400112: Line44
+    6400114: Line45
+    6400116: Line46
+    6400118: Line47
+    6400120: Line48
+    6400122: Line49
+    6400124: Line50
+    6400126: Line51
+    6400128: Line52
+    6400130: Line53
+    6400132: Line54
+    6400134: Line55
+    6400136: Line56
+    6400138: Line57
+    6400140: Object01
+    6400142: Shape01
+    6400144: Shape02
+    6400146: Shape03
+    6400148: Shape04
+    6400150: Shape05
+    6400152: Shape08
+    6400154: Shape09
+    6400156: Shape10
+    6400158: Shape11
+    6400160: Shape12
     7400000: Take 001
     9500000: //RootNode
   materials:
@@ -462,7 +543,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
