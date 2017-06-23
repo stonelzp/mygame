@@ -6,14 +6,14 @@ public class NPCSearchPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if(TargetObject!=null){
-			gameObject.GetComponent<NavMeshAgent> ().destination = TargetObject.position;
+			gameObject.GetComponent<UnityEngine.AI.NavMeshAgent> ().destination = TargetObject.position;
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(TargetObject!=null){
-			gameObject.GetComponent<NavMeshAgent> ().destination = TargetObject.position;
+			gameObject.GetComponent<UnityEngine.AI.NavMeshAgent> ().destination = TargetObject.position;
 		}
 	}
 }

@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
 // Shader created with Shader Forge v1.26 
@@ -107,7 +109,7 @@ Shader "MK4/Banner" {
                 float4 node_6172 = tex2Dlod(_VectorTexture,float4(TRANSFORM_TEX(node_7896, _VectorTexture),0.0,0));
                 v.vertex.xyz += (_Mask_var.rgb*(_VectorOffset.rgb+((_DistortPower*2.0+0.0)*(node_3600.rgb+(node_6172.rgb*_SmallDistortValue)))));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
+                o.pos = UnityObjectToClipPos(v.vertex );
                 return o;
             }
             void frag(
@@ -278,7 +280,7 @@ Shader "MK4/Banner" {
                 v.vertex.xyz += (_Mask_var.rgb*(_VectorOffset.rgb+((_DistortPower*2.0+0.0)*(node_3600.rgb+(node_6172.rgb*_SmallDistortValue)))));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 float3 lightColor = _LightColor0.rgb;
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
+                o.pos = UnityObjectToClipPos(v.vertex );
                 UNITY_TRANSFER_FOG(o,o.pos);
                 TRANSFER_VERTEX_TO_FRAGMENT(o)
                 return o;
@@ -457,7 +459,7 @@ Shader "MK4/Banner" {
                 v.vertex.xyz += (_Mask_var.rgb*(_VectorOffset.rgb+((_DistortPower*2.0+0.0)*(node_3600.rgb+(node_6172.rgb*_SmallDistortValue)))));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 float3 lightColor = _LightColor0.rgb;
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
+                o.pos = UnityObjectToClipPos(v.vertex );
                 UNITY_TRANSFER_FOG(o,o.pos);
                 TRANSFER_VERTEX_TO_FRAGMENT(o)
                 return o;
@@ -578,7 +580,7 @@ Shader "MK4/Banner" {
                 float4 node_6172 = tex2Dlod(_VectorTexture,float4(TRANSFORM_TEX(node_7896, _VectorTexture),0.0,0));
                 v.vertex.xyz += (_Mask_var.rgb*(_VectorOffset.rgb+((_DistortPower*2.0+0.0)*(node_3600.rgb+(node_6172.rgb*_SmallDistortValue)))));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
+                o.pos = UnityObjectToClipPos(v.vertex );
                 TRANSFER_SHADOW_CASTER(o)
                 return o;
             }

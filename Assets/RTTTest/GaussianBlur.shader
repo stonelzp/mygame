@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Custom/GaussianBlur" 
 {
 	Properties
@@ -39,7 +41,7 @@ Shader "Custom/GaussianBlur"
 			v2f vert(appdata_img i)
 			{
 				v2f o;
-				o.pos = mul(UNITY_MATRIX_MVP,i.vertex);
+				o.pos = UnityObjectToClipPos(i.vertex);
 				
 				//o.uv0 = i.texcoord.yx;
 				o.uv0 = i.texcoord.xy;

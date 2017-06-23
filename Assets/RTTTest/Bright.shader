@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Custom/Bright" 
 {
 	Properties 
@@ -31,7 +33,7 @@ Shader "Custom/Bright"
 			Out vert(appdata_img i)
 			{
 				Out o;
-				o.pos = mul(UNITY_MATRIX_MVP,i.vertex);
+				o.pos = UnityObjectToClipPos(i.vertex);
 				o.uv = i.texcoord;
 				
 				return o;

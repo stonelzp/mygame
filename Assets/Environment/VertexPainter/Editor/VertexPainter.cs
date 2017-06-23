@@ -303,7 +303,7 @@ public class VertexPainter : EditorWindow {
 					EditorUtility.SetDirty(currentSelection);
 							EditorUtility.SetDirty(currentSelectionMesh);
 							AssetDatabase.SaveAssets();
-							EditorApplication.SaveAssets();
+							AssetDatabase.SaveAssets();
 				}
 			} else {
 				

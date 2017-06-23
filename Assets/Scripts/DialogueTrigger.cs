@@ -24,8 +24,8 @@ public class DialogueTrigger : MonoBehaviour {
 			}
 
 			//NPC has searched Player,then cancel NPC's Nav Mesh Agent and script NPCSearchPlayer
-			if(NPCPlayer.GetComponent<NavMeshAgent>().enabled){
-				NPCPlayer.GetComponent<NavMeshAgent> ().enabled = false;
+			if(NPCPlayer.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled){
+				NPCPlayer.GetComponent<UnityEngine.AI.NavMeshAgent> ().enabled = false;
 			}
 			if(NPCPlayer.GetComponent<NPCSearchPlayer>().enabled){
 				NPCPlayer.GetComponent<NPCSearchPlayer> ().enabled = false;
