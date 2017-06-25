@@ -2,10 +2,20 @@
 using System.Collections;
 
 public class MonsterController : MonoBehaviour {
+    public GameObject AttackTarget;
+    
+
+
     private Animator MonsterAnimator;
+    private bool isPatrolling = false;
+    private Transform PatrolPosition;
+
+
+
 	// Use this for initialization
 	void Start () {
         MonsterAnimator = gameObject.GetComponent<Animator>();
+        PatrolPosition = gameObject.transform;
 	}
 
     // Update is called once per frame
@@ -49,10 +59,6 @@ public class MonsterController : MonoBehaviour {
             MonsterAnimator.SetBool("Run", false);
         }
 
-
-
-
-
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             MonsterAnimator.SetTrigger("Dead");
@@ -70,4 +76,16 @@ public class MonsterController : MonoBehaviour {
             MonsterAnimator.SetTrigger("Damage");
         }
     }
+
+    //Monsters AI :contains
+    //patroling routine
+    //Attack
+
+    private void MonsterPatrol()
+    {
+
+    }
+
+
+
 }

@@ -1,1 +1,5 @@
 1，player受到碰撞之后会受到力的作用开始旋转，不只是只有player包括所有的NPC模型。
+2，当运行游戏的时候，地图之间会闪动。（尝试使用terrian地形来制作地形怎么样？）
+3，Player身上带有Normal_Talk的Animation，但是并没有使用，之后会加入到PlayerController中去。
+4，对话的时候Player是可以离开NPC的，之后需要添加一个条件来限制不允许离开并进行Normal_Talk的动画。
+5，Player上坡的动作仍然需要优化。
