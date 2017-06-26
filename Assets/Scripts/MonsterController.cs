@@ -22,7 +22,6 @@ public class MonsterController : MonoBehaviour {
 		EndPosition = PatrolPosition;
 		gameObject.GetComponent<NavMeshAgent> ().destination = PatrolPosition;
 		isPatrolling = true;
-
 	}
 
     // Update is called once per frame
@@ -120,9 +119,7 @@ public class MonsterController : MonoBehaviour {
 			Debug.Log ("Turn Round");
 			return false;
 		}
-		
 	}
-
 
 
 }

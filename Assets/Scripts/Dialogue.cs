@@ -8,6 +8,7 @@ using System.IO;
 public class Dialogue : MonoBehaviour {
 	public GameObject dialogueCharactor;
 	public GameObject dialogueContinue;
+	public GameObject DialogueCanvas;
 
 	private string[] dialogue_strings;
 	private Text _textComponent;
@@ -41,6 +42,9 @@ public class Dialogue : MonoBehaviour {
 					CurrentDialogueIndex += 2;
 				} else {
 					Debug.Log ("The Story is end.");
+					if(DialogueCanvas.activeSelf){
+						DialogueCanvas.SetActive (false);					}
+
 				}
 			}
 		} else {
