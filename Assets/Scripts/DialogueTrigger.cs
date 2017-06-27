@@ -30,6 +30,8 @@ public class DialogueTrigger : MonoBehaviour {
 			if(NPCPlayer.GetComponent<NPCSearchPlayer>().enabled){
 				NPCPlayer.GetComponent<NPCSearchPlayer> ().enabled = false;
 			}
+
+			NPCPlayer.GetComponent<Animator> ().SetBool ("Run",false);
 		}
 
 

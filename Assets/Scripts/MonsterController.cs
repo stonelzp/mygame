@@ -8,6 +8,8 @@ public class MonsterController : MonoBehaviour {
 
     private Animator MonsterAnimator;
     private bool isPatrolling;
+	//near the player to attack;
+	public bool NearTarget;
 	//the monster next to Patrol position
     private Vector3 PatrolPosition;
 	private Vector3 StartPosition;
@@ -22,14 +24,17 @@ public class MonsterController : MonoBehaviour {
 		EndPosition = PatrolPosition;
 		gameObject.GetComponent<NavMeshAgent> ().destination = PatrolPosition;
 		isPatrolling = true;
+		NearTarget = false;
 	}
 
     // Update is called once per frame
     void Update() {
-        //sGetMonsterInput(); 
+        //GetMonsterInput(); 
 
 		if (isPatrolling) {
 			MonsterPatrol ();
+		} else {
+			MonsterAttack ();
 		}
 
     }
@@ -121,5 +126,25 @@ public class MonsterController : MonoBehaviour {
 		}
 	}
 
+	//monster attack action
+	private void MonsterAttack(){
+		//found the attack target
+		if (NearTarget) {
+			AttackAcion ();
+		} else {
+			//navigation set target destination to Nav Mesh Agent
+			gameObject.GetComponent<NavMeshAgent>().destination=AttackTarget.position;
+		}
+
+	}
+	//for the Script:MonsterAttackAreaTrigger.cs to set bool NearTarget
+	public void setBoolNearTarget(bool sign){
+		NearTarget = sign;
+	}
+	private IEnumerator AttackAcion(){
+		gameObject.GetComponent<NavMeshAgent> ().enabled = false;
+		MonsterAnimator.SetTrigger ("Attack01");
+		yield return new WaitForSeconds(2.0f);
+	}
 
 }
