@@ -15,6 +15,9 @@ public class MonsterController : MonoBehaviour {
 	private Vector3 StartPosition;
 	private Vector3 EndPosition;
 
+    //the distance of Monster Attack Area
+    private float AttackAreaDistance = 0.0f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +26,7 @@ public class MonsterController : MonoBehaviour {
 		PatrolPosition=new Vector3 (transform.position.x,transform.position.y,transform.position.z-15.0f);
 		EndPosition = PatrolPosition;
 		gameObject.GetComponent<NavMeshAgent> ().destination = PatrolPosition;
-		isPatrolling = true;
+		isPatrolling = false;
 		NearTarget = false;
 	}
 
@@ -130,19 +133,32 @@ public class MonsterController : MonoBehaviour {
 	private void MonsterAttack(){
 		//found the attack target
 		if (NearTarget) {
-			AttackAcion ();
+            Debug.Log("Attack0!");
+            StartCoroutine(AttackAcion());
+            if(Vector3.Distance(AttackTarget.position, gameObject.transform.position) > AttackAreaDistance)
+            {
+                NearTarget = false;
+            }
 		} else {
-			//navigation set target destination to Nav Mesh Agent
+            MonsterAnimator.SetBool("Run",true);
+            //navigation set target destination to Nav Mesh Agent
+            if (!gameObject.GetComponent<NavMeshAgent>().enabled)
+            {
+                gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            }
 			gameObject.GetComponent<NavMeshAgent>().destination=AttackTarget.position;
 		}
 
 	}
 	//for the Script:MonsterAttackAreaTrigger.cs to set bool NearTarget
 	public void setBoolNearTarget(bool sign){
+        AttackAreaDistance= Vector3.Distance(AttackTarget.position,gameObject.transform.position);
 		NearTarget = sign;
 	}
 	private IEnumerator AttackAcion(){
-		gameObject.GetComponent<NavMeshAgent> ().enabled = false;
+        Debug.Log("Attack!");
+        gameObject.GetComponent<NavMeshAgent> ().enabled = false;
+        MonsterAnimator.SetBool("Run",false);
 		MonsterAnimator.SetTrigger ("Attack01");
 		yield return new WaitForSeconds(2.0f);
 	}

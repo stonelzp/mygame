@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -372,6 +372,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 54000011008670224, guid: 96b478f7e1fd27341beb9950e9511979,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96b478f7e1fd27341beb9950e9511979, type: 2}
   m_IsPrefabParent: 0
@@ -401,6 +406,12 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &63959302 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000013444809712, guid: 96b478f7e1fd27341beb9950e9511979,
+    type: 2}
+  m_PrefabInternal: {fileID: 63959299}
+  m_Script: {fileID: 11500000, guid: 9331aab8bcd30d541b175d510df0926e, type: 3}
 --- !u!4 &63959306 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000012316669924, guid: 96b478f7e1fd27341beb9950e9511979,
@@ -4586,7 +4597,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 488532, guid: 57c87a43d50d11a46bbe549159564d88, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -22.49
+      value: -22.52
       objectReference: {fileID: 0}
     - target: {fileID: 488532, guid: 57c87a43d50d11a46bbe549159564d88, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5266,6 +5277,7 @@ GameObject:
   - component: {fileID: 1702181234}
   - component: {fileID: 1702181233}
   - component: {fileID: 1702181235}
+  - component: {fileID: 1702181236}
   m_Layer: 0
   m_Name: MonsterAttackArea
   m_TagString: Untagged
@@ -5311,6 +5323,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 63959306}
   offset: {x: 0, y: 1.2, z: 0}
+--- !u!114 &1702181236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1702181232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f601ed9d96b9a44a89f57e1d3f47e8c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster_controller: {fileID: 63959302}
 --- !u!1 &1722376686
 GameObject:
   m_ObjectHideFlags: 0
@@ -5488,7 +5512,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 427724, guid: 8fb04a38179624aef9e06063c90c1a85, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.5334102
+      value: 0.352
       objectReference: {fileID: 0}
     - target: {fileID: 427724, guid: 8fb04a38179624aef9e06063c90c1a85, type: 2}
       propertyPath: m_LocalPosition.z
@@ -6810,19 +6834,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.48445165
+      value: 0.31651098
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.054291118
+      value: 0.07313393
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0116069885
+      value: -0.03347287
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.8730547
+      value: -0.94517297
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
       propertyPath: m_RootOrder
@@ -6834,11 +6858,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 180
+      value: 323.6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+      value: -11.425
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
       propertyPath: m_LocalScale.x
@@ -6851,6 +6875,10 @@ Prefab:
     - target: {fileID: 400000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
       propertyPath: m_LocalScale.z
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 7.8240004
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11100000, guid: be8af5f53657a054d94930d8ef073048, type: 3}
