@@ -250,6 +250,12 @@ public class PlayerController : MonoBehaviour
 			}
 			Invoke ("particle02Play",1.5f);
 			break;
+		case "Normal_Talk":
+			AnimationPlay ["Normal_Talk"].wrapMode = WrapMode.Loop;
+			AnimationPlay ["Normal_Talk"].speed = 0.3f;
+			AnimationPlay.CrossFade ("Normal_Talk",0.4f);
+
+			break;
 		default:
 			break;
 		}
@@ -840,5 +846,13 @@ public class PlayerController : MonoBehaviour
 			Particle03.SetActive (false);
 			Particle03.SetActive (true);
 		}
+	}
+
+	//when DialogueTrigger is trigged,play talk animation
+	public void DialogueAnimationTalkPlay(){
+		playAnimation ("Normal_Talk");
+	}
+	public void DialogueAnimationTalkPlayEnd(){
+		playAnimation ("Normal_Idle");
 	}
 }

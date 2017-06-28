@@ -9,6 +9,8 @@ public class Dialogue : MonoBehaviour {
 	public GameObject dialogueCharactor;
 	public GameObject dialogueContinue;
 	public GameObject DialogueCanvas;
+	public GameObject Player;
+	public GameObject NPCPlayer;
 
 	private string[] dialogue_strings;
 	private Text _textComponent;
@@ -43,7 +45,14 @@ public class Dialogue : MonoBehaviour {
 				} else {
 					Debug.Log ("The Story is end.");
 					if(DialogueCanvas.activeSelf){
-						DialogueCanvas.SetActive (false);					}
+						DialogueCanvas.SetActive (false);	
+					}
+					if (!Player.GetComponent<PlayerController> ().enabled) {
+						Player.GetComponent<PlayerController> ().enabled = true;
+					}
+					//tell the player the dialogue has ended.
+					Player.GetComponent<PlayerController> ().DialogueAnimationTalkPlayEnd ();
+					//tell the NPC the Dialogue has ended.
 
 				}
 			}
@@ -52,13 +61,11 @@ public class Dialogue : MonoBehaviour {
 				dialogueContinue.SetActive (false);
 			}
 		}
-
-	
 	}
 
 	private IEnumerator display_dialogue(string stringToDisplay,string stringCharactor){
-		Debug.Log (stringToDisplay);
-		Debug.Log (stringCharactor);
+//		Debug.Log (stringToDisplay);
+//		Debug.Log (stringCharactor);
 		int stringLength = stringToDisplay.Length;
 		int currentStringIndex = 0;
 		DialogueIsDisplaying = true;
@@ -111,8 +118,8 @@ public class Dialogue : MonoBehaviour {
 		}
 
 		//show dialogue_string
-		foreach (string i in dialogue_strings) {
-			Debug.Log (i);
-		}
+//		foreach (string i in dialogue_strings) {
+//			Debug.Log (i);
+//		}
 	}
 }
