@@ -1,4 +1,4 @@
-1，player受到碰撞之后会受到力的作用开始旋转，不只是只有player包括所有的NPC模型。
+1，player受到碰撞之后会受到力的作用开始旋转，不只是只有player包括所有的NPC模型。将player的Y轴的freeze rotation开启之后或许可以解决这个问题。
 2，当运行游戏的时候，地图之间会闪动。（尝试使用terrian地形来制作地形怎么样？）
 3，Player身上带有Normal_Talk的Animation，但是并没有使用，之后会加入到PlayerController中去。
 4，对话的时候Player是可以离开NPC的，之后需要添加一个条件来限制不允许离开并进行Normal_Talk的动画。
@@ -6,3 +6,5 @@
 6,当按住移动的键位让角色保持移动的情况下移动会产生飞天的情况。
 7，关于对话的时候出现对话长于文本框内容的情况，可以考虑将存储对话的数组设置为一个定长的内容当超过这个长度的时候需要让第一排的文字删除第二排向上移动显示第三排（解决方案：在没有办法制作对话的滚动的情况下。）。
 8,(已解决)Archer01在接触到Player的时候会突然跑到terrian的下面，造成消失的假象，应该是自动寻路的问题，当Agent的位置放在baked map的下面，或者是没有完全放在上面则会导致这种瞬移的情况。好像不对，是由于Animator跟脚本ArcherController动画的问题导致动画的瞬移。
+9,Player跟Monster撞到一起的时候可能会在进入Monster的AttackArea内仍然处于寻路状态不攻击，但还没有找到出现此状态的原因。
+10，当player绕道Monster的后面同时处于Monster的AttackArea内，Monster会持续攻击而不是实时的攻击Player。或许修改一下AttackArea的范围会好一些。

@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class MonsterController : MonoBehaviour {
     public Transform AttackTarget;
     
-
-
     private Animator MonsterAnimator;
     private bool isPatrolling;
 	//near the player to attack;
@@ -17,6 +19,7 @@ public class MonsterController : MonoBehaviour {
 
     //the distance of Monster Attack Area
     private float AttackAreaDistance = 0.0f;
+	private float AttackCoolDown = 0.0f;
 
 
 	// Use this for initialization
@@ -33,6 +36,9 @@ public class MonsterController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //GetMonsterInput(); 
+		if(AttackCoolDown>0.0f){
+			AttackCoolDown -= Time.deltaTime;
+		}
 
 		if (isPatrolling) {
 			MonsterPatrol ();
@@ -140,13 +146,14 @@ public class MonsterController : MonoBehaviour {
                 NearTarget = false;
             }
 		} else {
-            MonsterAnimator.SetBool("Run",true);
-            //navigation set target destination to Nav Mesh Agent
-            if (!gameObject.GetComponent<NavMeshAgent>().enabled)
-            {
-                gameObject.GetComponent<NavMeshAgent>().enabled = true;
-            }
-			gameObject.GetComponent<NavMeshAgent>().destination=AttackTarget.position;
+			if (AttackCoolDown <= 0.0f) {
+				MonsterAnimator.SetBool ("Run", true);
+				//navigation set target destination to Nav Mesh Agent
+				if (!gameObject.GetComponent<NavMeshAgent> ().enabled) {
+					gameObject.GetComponent<NavMeshAgent> ().enabled = true;
+				}
+				gameObject.GetComponent<NavMeshAgent> ().destination = AttackTarget.position;
+			}
 		}
 
 	}
@@ -156,11 +163,14 @@ public class MonsterController : MonoBehaviour {
 		NearTarget = sign;
 	}
 	private IEnumerator AttackAcion(){
+		if (AttackCoolDown <= 0.0f) {
+			AttackCoolDown = 2.0f;
+		}
         Debug.Log("Attack!");
         gameObject.GetComponent<NavMeshAgent> ().enabled = false;
         MonsterAnimator.SetBool("Run",false);
 		MonsterAnimator.SetTrigger ("Attack01");
-		yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(1.5f);
 	}
 
 }
