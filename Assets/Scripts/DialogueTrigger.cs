@@ -26,12 +26,6 @@ public class DialogueTrigger : MonoBehaviour {
 			//NPC has searched Player,then cancel NPC's Nav Mesh Agent and script NPCSearchPlayer
 			//tell NPCPlayer to stop the Navigation
 			NPCPlayer.GetComponent<ArcherController>().NavigationEnd();
-			if(NPCPlayer.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled){
-				NPCPlayer.GetComponent<UnityEngine.AI.NavMeshAgent> ().enabled = false;
-			}
-			if(NPCPlayer.GetComponent<NPCSearchPlayer>().enabled){
-				NPCPlayer.GetComponent<NPCSearchPlayer> ().enabled = false;
-			}
 
 			//Player Stop to Controller
 			if(Player.GetComponent<PlayerController>().enabled){

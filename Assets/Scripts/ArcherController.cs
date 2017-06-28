@@ -7,12 +7,12 @@ using UnityEngine.AI;
 /// Archer controller is attach to GameObject Archer01
 /// </summary>
 public class ArcherController : MonoBehaviour {
-	public Transform targetDestination;
-
-
+	public Transform targetPlayerPosition;
+	//the destination of NPCPlayer
+	private Transform targetDestination;
 	private Animator ArcherAnimator;
 	private bool isSearching=false;
-
+	public Transform StartPositon;
 
 	// Use this for initialization
 	void Start () {	
@@ -23,8 +23,10 @@ public class ArcherController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//NPCNavigationAnimation();
-		if(isSearching){
+		if (isSearching) {
 			NPCNavigation ();
+		} else {
+			NPCDialogueStatus ();
 		}
 	}
 	private void NPCGetInput(){
@@ -83,15 +85,26 @@ public class ArcherController : MonoBehaviour {
 		}
 		ArcherAnimator.SetBool ("Run",true);
 	}
+	private void NPCDialogueStatus(){
+		if (gameObject.GetComponent<NavMeshAgent> ().enabled) {
+			gameObject.GetComponent<NavMeshAgent> ().enabled = false;
+		}
+		ArcherAnimator.SetBool ("Run",false);
+	}
 
 	public void NavigationStart(){
 		isSearching = true;
+		targetDestination = targetPlayerPosition;
 	}
 
 	public void NavigationEnd(){
 		isSearching = false;
 	}
 
+	public void NPCReturn(){
+		isSearching = true;
+		targetDestination = StartPositon;
+	}
 
 
 }

@@ -53,7 +53,7 @@ public class Dialogue : MonoBehaviour {
 					//tell the player the dialogue has ended.
 					Player.GetComponent<PlayerController> ().DialogueAnimationTalkPlayEnd ();
 					//tell the NPC the Dialogue has ended.
-
+					NPCPlayer.GetComponent<ArcherController>().NPCReturn();
 				}
 			}
 		} else {

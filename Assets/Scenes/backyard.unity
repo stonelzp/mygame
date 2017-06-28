@@ -5037,11 +5037,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400120, guid: f4adab35108a95c4cb317adefd45d781, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -44.77
+      value: -45.48
       objectReference: {fileID: 0}
     - target: {fileID: 400120, guid: f4adab35108a95c4cb317adefd45d781, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 12.554
+      value: 12.502
       objectReference: {fileID: 0}
     - target: {fileID: 400120, guid: f4adab35108a95c4cb317adefd45d781, type: 2}
       propertyPath: m_LocalPosition.z
@@ -7239,7 +7239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f93f03ffccc94499ab67949482b7339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDestination: {fileID: 584375169}
+  targetPlayerPosition: {fileID: 584375169}
+  StartPositon: {fileID: 885534528}
 --- !u!4 &1721540185 stripped
 Transform:
   m_PrefabParentObject: {fileID: 417746, guid: 8836a80081ca0a84b98d578e18b914ec, type: 2}
@@ -7885,6 +7886,7 @@ MonoBehaviour:
   dialogueContinue: {fileID: 95672511}
   DialogueCanvas: {fileID: 987115747}
   Player: {fileID: 1675830573}
+  NPCPlayer: {fileID: 1715172797}
 --- !u!1001 &1862501492
 Prefab:
   m_ObjectHideFlags: 0
