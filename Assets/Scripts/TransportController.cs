@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+/// <summary>
+/// attach to GameObject TransportUI
+/// </summary>
 public class TransportController : MonoBehaviour {
-	public GameObject LeaveButton;
-	public GameObject StayButton;
+	public GameObject LeaveButton;//the GameObject "TransportUI/leave"
+	public GameObject StayButton;//the GameObject "TransportUI/stay"
+	public GameObject TransportTriggerObject;//the Object "TransportObjects/Trigger"
 	//false is stay,true is leave
 	private bool SelectedButton;
 	private Color newColor;
@@ -46,10 +50,15 @@ public class TransportController : MonoBehaviour {
 			if (SelectedButton) {
 				Debug.Log ("跳转到下一个场景。");
 			} else {
-				Debug.Log ("继续停留。");
+				if(gameObject.activeSelf){
+					gameObject.SetActive (false);
+				}
+				TransportTriggerObject.GetComponent<TransportTrigger> ().NoticeFromTransportUI ();
 			}
 		}
 	}
+
+
 
 
 }

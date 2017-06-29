@@ -36,4 +36,11 @@ public class TransportTrigger : MonoBehaviour {
 				
 		}
 	}
+	//when Player select continue stay in the scene,get the notice for TransportUI.
+	public void NoticeFromTransportUI(){
+		if (!Player.GetComponent<PlayerController> ().enabled) {
+			Player.GetComponent<PlayerController> ().enabled = true;
+		}
+			
+	}
 }

@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-	public Camera camera_normal;
-	public Camera camera_lock;
+//	public Camera camera_normal;
+//	public Camera camera_lock;
 	//partical system controll
 	public GameObject Particle01;
 	public GameObject Particle02;
