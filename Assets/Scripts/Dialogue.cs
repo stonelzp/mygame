@@ -24,7 +24,7 @@ public class Dialogue : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 		_textComponent = gameObject.GetComponent<Text> ();
 		_textCharactor = dialogueCharactor.GetComponent<Text>();
 		dialogue_init();

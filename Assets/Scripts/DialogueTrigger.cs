@@ -6,6 +6,7 @@ public class DialogueTrigger : MonoBehaviour {
 	public GameObject NPCPlayer;
 	public GameObject DialogueCanvas;
 
+	private string DialogueSceneName;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,6 +18,7 @@ public class DialogueTrigger : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
+		Debug.Log ("开启对话");
 		//if the collder is NPC,active DialogueCanvas
 		if (other.tag == "NPC") {
 			if(!DialogueCanvas.activeSelf){
@@ -39,6 +41,11 @@ public class DialogueTrigger : MonoBehaviour {
 		if(other.tag=="NPC01"){
 			if(!DialogueCanvas.activeSelf){
 				DialogueCanvas.SetActive (true);
+			}
+			//Player Stop to Controller
+			if(Player.GetComponent<PlayerController>().enabled){
+				Player.GetComponent<PlayerController> ().DialogueAnimationTalkPlay ();
+				Player.GetComponent<PlayerController> ().enabled = false;
 			}
 		}
 
