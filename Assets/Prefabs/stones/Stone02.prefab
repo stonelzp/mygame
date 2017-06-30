@@ -51,7 +51,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4636352606613348}
-  - component: {fileID: 95417725648683958}
   m_Layer: 0
   m_Name: Stone02
   m_TagString: Untagged
@@ -209,20 +208,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1085984679093806}
   m_Mesh: {fileID: 4300004, guid: f1d069fd29746494a9f592fd9fa71cf9, type: 3}
---- !u!95 &95417725648683958
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1633317030189284}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: f1d069fd29746494a9f592fd9fa71cf9, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

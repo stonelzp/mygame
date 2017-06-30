@@ -5,7 +5,7 @@ using UnityEngine;
 /// Monster attack area trigger. required Component Script:Follow Target  set offset (0,1.2,0)
 /// </summary>
 public class MonsterAttackAreaTrigger : MonoBehaviour {
-	public MonsterController monster_controller;
+	public MonsterWarriorController monster_controller;
 	// Use this for initialization
 	void Start () {
 		

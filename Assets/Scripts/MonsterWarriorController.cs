@@ -5,7 +5,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class MonsterController : MonoBehaviour {
+public class MonsterWarriorController : MonoBehaviour {
     public Transform AttackTarget;
     
     private Animator MonsterAnimator;

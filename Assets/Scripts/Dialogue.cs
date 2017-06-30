@@ -54,6 +54,8 @@ public class Dialogue : MonoBehaviour {
 					Player.GetComponent<PlayerController> ().DialogueAnimationTalkPlayEnd ();
 					//tell the NPC the Dialogue has ended.
 					NPCPlayer.GetComponent<ArcherController>().NPCReturn();
+
+
 				}
 			}
 		} else {

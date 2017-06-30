@@ -36,6 +36,12 @@ public class DialogueTrigger : MonoBehaviour {
 			NPCPlayer.GetComponent<Animator> ().SetBool ("Run",false);
 		}
 
+		if(other.tag=="NPC01"){
+			if(!DialogueCanvas.activeSelf){
+				DialogueCanvas.SetActive (true);
+			}
+		}
+
 
 	}
 
