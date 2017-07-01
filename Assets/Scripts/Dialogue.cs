@@ -127,7 +127,8 @@ public class Dialogue : MonoBehaviour {
 			xmldoc.Load (filePath);
 			XmlNodeList node = xmldoc.SelectSingleNode ("dialogue").ChildNodes;
 			foreach (XmlElement nodelist in node) {
-				//get scene-altar dialogue data
+                //get scene-altar dialogue data
+                Debug.Log(DialogueName);
 				if (nodelist.Name == DialogueName) {
 					int i = 0;//the index present to dialogue_strings
 					int j = 0;//the index to check if the xml/body/id is correct
@@ -152,8 +153,8 @@ public class Dialogue : MonoBehaviour {
 		}
 
 		//show dialogue_string
-//		foreach (string i in dialogue_strings) {
-//			Debug.Log (i);
-//		}
+		foreach (string i in dialogue_strings) {
+			Debug.Log (i);
+		}
 	}
 }

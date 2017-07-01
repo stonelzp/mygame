@@ -51,15 +51,45 @@ public class DialogueTrigger : MonoBehaviour {
 			}
 		}
 
+        if (other.tag == "NPC02")
+        {
+            Debug.Log("kai shi dui hua");
+            GlobalController.Instance.setDialogueSceneNameAttribute("scene-village");
+            if (!DialogueCanvas.activeSelf)
+            {
+                DialogueCanvas.SetActive(true);
+            }
+            //Player Stop to Controller
+            if (Player.GetComponent<PlayerController>().enabled)
+            {
+                Player.GetComponent<PlayerController>().DialogueAnimationTalkPlay();
+                Player.GetComponent<PlayerController>().enabled = false;
+            }
+        }
+
 
 	}
 
-	//本来是想离开一定范围之后会结束交谈结果是撞到触发器的时候，有可能“接触不良”，导致离开碰撞体触发下面的函数，暂时封印
-//	void OnTriggerExit(Collider other){
-//		if (other.tag == "NPC") {
-//			if(DialogueCanvas.activeSelf){
-//				DialogueCanvas.SetActive (false);
-//			}
-//		}
-//	}
+    //本来是想离开一定范围之后会结束交谈结果是撞到触发器的时候，有可能“接触不良”，导致离开碰撞体触发下面的函数，暂时封印
+    //	void OnTriggerExit(Collider other){
+    //		if (other.tag == "NPC") {
+    //			if(DialogueCanvas.activeSelf){
+    //				DialogueCanvas.SetActive (false);
+    //			}
+    //		}
+    //	}
+
+    /*private void OnTriggerStartDialogue()
+    {
+        if (!DialogueCanvas.activeSelf)
+        {
+            DialogueCanvas.SetActive(true);
+        }
+        //Player Stop to Controller
+        if (Player.GetComponent<PlayerController>().enabled)
+        {
+            Player.GetComponent<PlayerController>().DialogueAnimationTalkPlay();
+            Player.GetComponent<PlayerController>().enabled = false;
+        }
+    }*/
 }

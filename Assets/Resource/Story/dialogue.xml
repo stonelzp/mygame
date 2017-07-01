@@ -63,5 +63,37 @@
       <charactor>星月</charactor>
       <value>好了好了，听我说，这次叫你过来是想让你下山替我去取一件东西。</value>
     </body>
+    
   </scene-home>
+  <scene-village>
+    <body id="0">
+      <charactor>星莲</charactor>
+      <value>大师姐~大师姐~</value>
+    </body>
+    <body id="1">
+      <charactor>星闲</charactor>
+      <value>小师妹啊，来我这里玩啦。</value>
+    </body>
+    <body id="2">
+      <charactor>星莲</charactor>
+      <value>嗯，不过这一次是师傅叫我过来的。</value>
+    </body>
+    <body id="3">
+      <charactor>星闲</charactor>
+      <value>师傅？师傅叫你来干什么？不是你又闯了什么货，来我这里避难的。</value>
+    </body>
+    <body id="4">
+      <charactor>星莲</charactor>
+      <value>大师姐过分了啊，是师傅叫我来大师姐这儿取一个东西的，说是寄存在你这儿的。</value>
+    </body>
+    <body id="5">
+      <charactor>星闲</charactor>
+      <value>哦，那叫你来取什么东西？</value>
+    </body>
+    <body id="6">
+      <charactor>星莲</charactor>
+      <value>师傅没有跟我说是什么东西，说我这样跟你说你就明白了，我追问她是什么东西的时候就把我赶走了，说我在她身边总觉得心有余悸而力不足而惶惶不可终日......</value>
+    </body>
+    
+  </scene-village>
 </dialogue>

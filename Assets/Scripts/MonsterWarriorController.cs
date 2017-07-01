@@ -26,10 +26,11 @@ public class MonsterWarriorController : MonoBehaviour {
 	void Start () {
         MonsterAnimator = gameObject.GetComponent<Animator>();
 		StartPosition = gameObject.transform.position;
+        //set the monster patrol position
 		PatrolPosition=new Vector3 (transform.position.x,transform.position.y,transform.position.z-15.0f);
 		EndPosition = PatrolPosition;
 		gameObject.GetComponent<NavMeshAgent> ().destination = PatrolPosition;
-		isPatrolling = false;
+		isPatrolling = true;
 		NearTarget = false;
 	}
 

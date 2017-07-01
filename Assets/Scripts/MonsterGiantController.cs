@@ -49,7 +49,7 @@ public class MonsterGiantController : MonoBehaviour {
 
 	}
 
-	private void GetMonsterInput()
+	/*private void GetMonsterInput()
 	{
 		if (Input.GetKeyDown(KeyCode.W))
 		{
@@ -101,7 +101,7 @@ public class MonsterGiantController : MonoBehaviour {
 		{
 			MonsterAnimator.SetTrigger("Damage");
 		}
-	}
+	}*/
 
 	//Monsters AI :contains
 	//patroling routine

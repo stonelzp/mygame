@@ -26,6 +26,9 @@ public class GlobalController : MonoBehaviour {
             case "scene-home":
                 GlobalController.Instance.DialogueSceneName = "scene-home";
                 break;
+            case "scene-village":
+                GlobalController.Instance.DialogueSceneName = "scene-village";
+                break;
             default:
                 Debug.Log("the dialogue has no scene name!");
                 break;
