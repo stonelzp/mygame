@@ -38,4 +38,30 @@
 			<value>知道了。</value>
 		</body>
 	</scene-altar>
+  <scene-home>
+    <body id="0">
+      <charactor>星莲</charactor>
+      <value>师傅，我来了，找我有什么吩咐？</value>
+    </body>
+    <body id="1">
+      <charactor>星月</charactor>
+      <value>你又跑哪里去玩了，这么久才过来。整天就知道玩玩玩，也不跟你的师姐们学学，你看你现在的这点浅薄道行，将来怎么能放心的让你下山历练，你不是很想下山去玩吗？如果你还不好好修行，干脆不让你下山一辈子待在山上好了。</value>
+    </body>
+    <body id="2">
+      <charactor>星莲</charactor>
+      <value>这可万万使不得啊师傅，徒弟发誓好好专心修行，向师姐们学习，将来成为一名为民除害的女侠，不给师傅丢脸。</value>
+    </body>
+    <body id="3">
+      <charactor>星月</charactor>
+      <value>发誓就属你最快了，哪一次都没见你好好做。还有你早就给为师的脸丢尽了，这点你就不用费心了。还为民除害，你不要欺女霸男为师就已经谢天谢地了。</value>
+    </body>
+    <body id="4">
+      <charactor>星莲</charactor>
+      <value>也没有那么严重吧，我平时虽然......</value>
+    </body>
+    <body id="5">
+      <charactor>星月</charactor>
+      <value>好了好了，听我说，这次叫你过来是想让你下山替我去取一件东西。</value>
+    </body>
+  </scene-home>
 </dialogue>

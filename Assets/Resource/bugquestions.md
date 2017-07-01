@@ -8,3 +8,6 @@
 8,(已解决)Archer01在接触到Player的时候会突然跑到terrian的下面，造成消失的假象，应该是自动寻路的问题，当Agent的位置放在baked map的下面，或者是没有完全放在上面则会导致这种瞬移的情况。好像不对，是由于Animator跟脚本ArcherController动画的问题导致动画的瞬移。
 9,Player跟Monster撞到一起的时候可能会在进入Monster的AttackArea内仍然处于寻路状态不攻击，但还没有找到出现此状态的原因。
 10，当player绕道Monster的后面同时处于Monster的AttackArea内，Monster会持续攻击而不是实时的攻击Player。或许修改一下AttackArea的范围会好一些。
+
+
+11,palyer移动到（师傅）所在的院子里的时候，摄像头的跟进有些太远，希望之后做一下改进。

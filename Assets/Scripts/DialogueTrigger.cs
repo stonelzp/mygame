@@ -21,7 +21,8 @@ public class DialogueTrigger : MonoBehaviour {
 		Debug.Log ("开启对话");
 		//if the collder is NPC,active DialogueCanvas
 		if (other.tag == "NPC") {
-			if(!DialogueCanvas.activeSelf){
+            GlobalController.Instance.setDialogueSceneNameAttribute("scene-altar");
+            if (!DialogueCanvas.activeSelf){
 				DialogueCanvas.SetActive (true);
 			}
 
@@ -39,6 +40,7 @@ public class DialogueTrigger : MonoBehaviour {
 		}
 
 		if(other.tag=="NPC01"){
+            GlobalController.Instance.setDialogueSceneNameAttribute("scene-home");
 			if(!DialogueCanvas.activeSelf){
 				DialogueCanvas.SetActive (true);
 			}

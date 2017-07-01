@@ -21,12 +21,15 @@ public class Dialogue : MonoBehaviour {
 	private int CurrentDialogueIndex = 0;
 
 	private bool DialogueIsDisplaying=false;
+    private bool DialogueSkip = false;
 
+    private string DialogueName;
 
 	// Use this for initialization
 	void Start () {
 		_textComponent = gameObject.GetComponent<Text> ();
 		_textCharactor = dialogueCharactor.GetComponent<Text>();
+        DialogueName = GlobalController.Instance.getDialogueSceneName();
 		dialogue_init();
 
 
@@ -39,31 +42,58 @@ public class Dialogue : MonoBehaviour {
 				dialogueContinue.SetActive (true);
 			}
 			if (Input.GetKeyDown (KeyCode.Return)) {
-				if (CurrentDialogueIndex < DialogueLength) {
-					StartCoroutine (display_dialogue (dialogue_strings [CurrentDialogueIndex + 1], dialogue_strings [CurrentDialogueIndex]));
-					CurrentDialogueIndex += 2;
-				} else {
-					Debug.Log ("The Story is end.");
-					if(DialogueCanvas.activeSelf){
-						DialogueCanvas.SetActive (false);	
-					}
-					if (!Player.GetComponent<PlayerController> ().enabled) {
-						Player.GetComponent<PlayerController> ().enabled = true;
-					}
-					//tell the player the dialogue has ended.
-					Player.GetComponent<PlayerController> ().DialogueAnimationTalkPlayEnd ();
-					//tell the NPC the Dialogue has ended.
-					NPCPlayer.GetComponent<ArcherController>().NPCReturn();
-
-
-				}
+                showDialogueLogic();
 			}
+            //skip the dialogue
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SecondsBetweenCharacters = Time.deltaTime;
+                DialogueSkip = true;
+            }
+            if (DialogueSkip)
+            {
+                showDialogueLogic();
+            }
+
 		} else {
 			if(dialogueContinue.activeSelf){
 				dialogueContinue.SetActive (false);
 			}
 		}
 	}
+    //controll the Dialogue playing logic,how to paly and at the end of the paly how to deal with GameObjects.
+    private void showDialogueLogic()
+    {
+        if (CurrentDialogueIndex < DialogueLength)
+        {
+            StartCoroutine(display_dialogue(dialogue_strings[CurrentDialogueIndex + 1], dialogue_strings[CurrentDialogueIndex]));
+            CurrentDialogueIndex += 2;
+        }
+        else
+        {
+            /*这里有一个当Player对话完毕之后虽然结束了对话但是实际上还可以继续触发对话的问题，
+            只是CurrentDialogueIndex >=DialogueLength的原因，
+            对话的UI出现的同时因为这个条件再次被set false，虽然暂时没有什么影响。*/
+            Debug.Log("The Story is end.");
+            if (DialogueCanvas.activeSelf)
+            {
+                DialogueCanvas.SetActive(false);
+            }
+            if (!Player.GetComponent<PlayerController>().enabled)
+            {
+                Player.GetComponent<PlayerController>().enabled = true;
+            }
+            //tell the player the dialogue has ended.
+            Player.GetComponent<PlayerController>().DialogueAnimationTalkPlayEnd();
+            //tell the NPC the Dialogue has ended.
+            if (GlobalController.Instance.getDialogueSceneName() == "scene-altar")
+            {
+                NPCPlayer.GetComponent<ArcherController>().NPCReturn();
+            }
+
+
+        }
+    }
 
 	private IEnumerator display_dialogue(string stringToDisplay,string stringCharactor){
 //		Debug.Log (stringToDisplay);
@@ -87,8 +117,10 @@ public class Dialogue : MonoBehaviour {
 	}
 
 	private void dialogue_init(){
-		//load xml
-		string filePath=Application.dataPath+"/Resource/Story/dialogue.xml";
+        //init the SecondsBetweenCharacters Attribute
+        SecondsBetweenCharacters = 0.1f;
+        //load xml
+        string filePath=Application.dataPath+"/Resource/Story/dialogue.xml";
 		if (File.Exists (filePath)) {
 			Debug.Log ("Story file is found!");
 			XmlDocument xmldoc = new XmlDocument ();
@@ -96,7 +128,7 @@ public class Dialogue : MonoBehaviour {
 			XmlNodeList node = xmldoc.SelectSingleNode ("dialogue").ChildNodes;
 			foreach (XmlElement nodelist in node) {
 				//get scene-altar dialogue data
-				if (nodelist.Name == "scene-altar") {
+				if (nodelist.Name == DialogueName) {
 					int i = 0;//the index present to dialogue_strings
 					int j = 0;//the index to check if the xml/body/id is correct
 					DialogueLength=nodelist.ChildNodes.Count*2;
