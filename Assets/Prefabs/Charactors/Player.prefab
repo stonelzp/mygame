@@ -162,9 +162,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 488492}
+  - component: {fileID: 136097719935905954}
   m_Layer: 0
   m_Name: W_Bone
-  m_TagString: Untagged
+  m_TagString: PlayerWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1303,7 +1304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113338}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -44.561405, y: 12.53, z: 21.59}
+  m_LocalPosition: {x: 62.12, y: 0.352, z: -33.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 445152}
@@ -1973,6 +1974,7 @@ MonoBehaviour:
   Particle01: {fileID: 1562792019377242}
   Particle02: {fileID: 1793971685668616}
   Particle03: {fileID: 1906042667246016}
+  ObjectWeaponCollider: {fileID: 113816}
 --- !u!136 &13686080
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2833,6 +2835,19 @@ MonoBehaviour:
     m_RotationOrder: 4
   GraphScaleX: 0.5
   GraphScaleY: 0.4
+--- !u!136 &136097719935905954
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113816}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.14
+  m_Height: 1.84
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!182 &182009886422456522
 WindZone:
   m_ObjectHideFlags: 1

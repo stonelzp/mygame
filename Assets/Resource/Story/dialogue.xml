@@ -63,7 +63,42 @@
       <charactor>星月</charactor>
       <value>好了好了，听我说，这次叫你过来是想让你下山替我去取一件东西。</value>
     </body>
-    
+    <body id="6">
+      <charactor>星莲</charactor>
+      <value>唉？我可以下山了吗？刚才还说......</value>
+    </body>
+    <body id="7">
+      <charactor>星月</charactor>
+      <value>你个蠢货先听我说完，不是要你下山历练，是要你去你大师姐那里取一件东西，然后送到我这里来。当然这也是对你的一个试炼，你要是连这个小任务都没有给我好好完成，你就住在山上一辈子吧。</value>
+    </body>
+    <body id="8">
+      <charactor>星莲</charactor>
+      <value>保证顺利完成任务！师傅您就在这儿喝着茶等着徒儿双手把东西递给您就好了。所以要我去大师姐那儿去取什么东西呢？</value>
+    </body>
+    <body id="9">
+      <charactor>星月</charactor>
+      <value>你跟你大师姐说来取寄存在她那儿的东西，她就会明白的，好了赶紧去吧。</value>
+    </body>
+    <body id="10">
+      <charactor>星莲</charactor>
+      <value>什么东西啊神神秘秘的。</value>
+    </body>
+    <body id="11">
+      <charactor>星月</charactor>
+      <value>最近为师总觉得心神不宁，尤其是你在我身边的时候，脑海里似乎有一个声音催促着我些什么，搞得我的心总是砰砰直跳。</value>
+    </body>
+    <body id="12">
+      <charactor>星莲</charactor>
+      <value>啊，师傅难道是，感受到了我身上巨大的神秘力量了？</value>
+    </body>
+    <body id="13">
+      <charactor>星月</charactor>
+      <value>是什么是，你身上闯祸的巨大力量一点也不神秘。赶紧给我下去把东西拿回来，别在这儿来烦我。</value>
+    </body>
+    <body id="14">
+      <charactor>星莲</charactor>
+      <value>嘿嘿，徒儿这就去。</value>
+    </body>
   </scene-home>
   <scene-village>
     <body id="0">
@@ -94,6 +129,163 @@
       <charactor>星莲</charactor>
       <value>师傅没有跟我说是什么东西，说我这样跟你说你就明白了，我追问她是什么东西的时候就把我赶走了，说我在她身边总觉得心有余悸而力不足而惶惶不可终日......</value>
     </body>
-    
+    <body id="7">
+      <charactor>星闲</charactor>
+      <value>去去去，我看就是你这样油嘴滑舌师傅才不跟你说的。</value>
+    </body>
+    <body id="8">
+      <charactor>星莲</charactor>
+      <value>果然是什么秘密物件？难不成是关乎天下兴亡的秘密？或者是什么神兵要咱们门派里面最弱的那一个来继承，然后曝出我的惊天身世，我便可以手持神兵拯救天下，从而抱得美男归，从此流芳千古成为一段佳话……</value>
+    </body>
+    <body id="9">
+      <charactor>星闲</charactor>
+      <value>哈哈哈哈既然你有身为最弱的自觉还指望着神兵选你，神兵要不要这么廉价的哟。不过既然师傅是叫你来取的，那应该是要告诉你了。</value>
+    </body>
+    <body id="10">
+      <charactor>星莲</charactor>
+      <value>呃...想想也不成么......</value>
+    </body>
+    <body id="11">
+      <charactor>星</charactor>
+      <value>不过或许真的会与你的身世有什么联系也说不定......</value>
+    </body>
+    <body id="12">
+      <charactor>星闲</charactor>
+      <value>......(似乎是携带了在身上)</value>
+    </body>
+    <body id="13">
+      <charactor>星莲</charactor>
+      <value>这个就是师傅要的东西么？一块石头？咦？上面还有发光的字哎，“一”咦？什么一...</value>
+    </body>
+    <body id="14">
+      <charactor>星闲</charactor>
+      <value>哎？你认得上面的图案吗？那是文字吗？</value>
+    </body>
+    <body id="15">
+      <charactor>星莲</charactor>
+      <value>上面写得是一个“一”字，哎大师姐你不认得吗？难不成我其实是要比大师姐博学的多？难不成我的废柴气息只是浮于表象？实际上内在是要高于师姐你们的？</value>
+    </body>
+    <body id="16">
+      <charactor>星闲</charactor>
+      <value>或许吧（扶额），好了好了别手舞足蹈的，比师姐多认识一个字就开心成这样，那让你学会了法术岂不是要骑在师姐头上了？</value>
+    </body>
+    <body id="17">
+      <charactor>星莲</charactor>
+      <value>怎么会怎么会，大师姐就是大师姐，就算我学会了法术骑在大师姐头上了，我对大师姐的敬佩之情也是不会改变的。</value>
+    </body>
+    <body id="18">
+      <charactor>星闲</charactor>
+      <value>结果你还是要骑在我头上是吗？看来离开大师姐身边久了，胆子也大了不少啊。</value>
+    </body>
+    <body id="19">
+      <charactor>星莲</charactor>
+      <value>哪里哪里，我这不是根本学不会法术么…嘿嘿</value>
+    </body>
+    <body id="20">
+      <charactor>星闲</charactor>
+      <value>（一顿）说起来这块石头一开始是师傅发现你的时候在你身上发现的，那个时候只是一个石头而已，上面并没有图案，那个图案是最近几年刚出现的。师傅说她一靠近这块石头就觉得脑海里有声音，觉得烦了便先放在我这里寄存了。或许是到了把这块石头还给你的时候了，要是让你戴在身上，估计就不知道丢在哪里了。</value>
+    </body>
+    <body id="21">
+      <charactor>星莲</charactor>
+      <value>哪有那么夸张，我要是知道这个很重要我一定会好好保管的，怎么舍得弄丢它。</value>
+    </body>
+    <body id="22">
+      <charactor>星闲</charactor>
+      <value>哈哈哈你的事情我还不清楚吗，我保证它不出三天就会消失的无影无踪。</value>
+    </body>
+    <body id="23">
+      <charactor>星莲</charactor>
+      <value>......</value>
+    </body>
+    <body id="24">
+      <charactor>星闲</charactor>
+      <value>玩笑先放在一边，伴随着这石头的异象，或许揭示你的身世的时候也不远了。不过就算是离开这里，也一定记得多回来看看师傅和你的师姐们啊。</value>
+    </body>
+    <body id="25">
+      <charactor>星莲</charactor>
+      <value>师姐们暂且不说，怕是师傅希望我离得越远越好吧。</value>
+    </body>
+    <body id="26">
+      <charactor>星闲</charactor>
+      <value>为什么会这么想？是因为你闯下的祸会惹得师傅厌烦吗？我倒不这么觉得。</value>
+    </body>
+    <body id="27">
+      <charactor>星莲</charactor>
+      <value>唉？哪还有什么原因吗？</value>
+    </body>
+    <body id="28">
+      <charactor>星闲</charactor>
+      <value>我倒是觉得师傅最喜欢的就是你了，小师妹，估计这个门派里的人都知道。</value>
+    </body>
+    <body id="29">
+      <charactor>星莲</charactor>
+      <value>最喜欢我...？</value>
+    </body>
+    <body id="30">
+      <charactor>星闲</charactor>
+      <value>你觉得你闯下的祸够你在后山关几年？在我看来至少10年不止了（笑），可你现在还在清殿上活蹦乱跳的。身为你们的大师姐我自问是没有那么大权力的，那你觉得会是谁呢？</value>
+    </body>
+    <body id="31">
+      <charactor>星莲</charactor>
+      <value>师傅......</value>
+    </body>
+    <body id="32">
+      <charactor>星闲</charactor>
+      <value>哈哈哈，知道就好，大家都心知肚明，对你就睁一只眼闭一只眼了，还好你也没有捅出天大的篓子。知道分寸的孩子就是好孩子。</value>
+    </body>
+    <body id="33">
+      <charactor>星莲</charactor>
+      <value>大师姐......</value>
+    </body>
+    <body id="34">
+      <charactor>星闲</charactor>
+      <value>天色也很晚了，今天就在我这里住下，明天一早再回师傅那里复命吧。</value>
+    </body>
+    <body id="35">
+      <charactor>星莲</charactor>
+      <value>恩，好的大师姐。</value>
+    </body>
   </scene-village>
+  <scene-village1>
+    <body id="0">
+      <charactor>星莲</charactor>
+      <value>哦对了师姐，来你这儿的路上我遇见了几只杂鱼顺手就解决了，不过不是每个人都像我这么强的不是么，一般人更不用说了，大师姐小心一些。</value>
+    </body>
+    <body id="1">
+      <charactor>星闲</charactor>
+      <value>杂鱼？什么杂鱼？</value>
+    </body>
+    <body id="1">
+      <charactor>星莲</charactor>
+      <value>就是一些妖怪啊，平常见到咱们都是绕着咱们走的，突然像是谁给了它们挑战我的信心一样敢站出来挑战我，就被我轻描淡写的收拾掉了。杂鱼就是杂鱼。</value>
+    </body>
+    <body id="1">
+      <charactor>星闲</charactor>
+      <value>你昨天见到我的时候怎么不说？没有受伤吧？</value>
+    </body>
+    <body id="1">
+      <charactor>星莲</charactor>
+      <value>不是说了轻描淡写的就收拾掉了吗。</value>
+    </body>
+    <body id="1">
+      <charactor>星闲</charactor>
+      <value>你的轻描淡写是下了十分力气的轻吧。竟然挑我们姐妹中最弱的一个来欺负看来它们是活腻了，看我不捣了它们的老巢。</value>
+    </body>
+    <body id="1">
+      <charactor>星莲</charactor>
+      <value>...我其实很强的......</value>
+    </body>
+    <body id="1">
+      <charactor>星闲</charactor>
+      <value>还有这件事你见到师傅的时候也跟师傅说一下，或许师傅会知道什么也不一定。</value>
+    </body>
+    <body id="1">
+      <charactor>星莲</charactor>
+      <value>哦...好的大师姐。那我回去找师傅了。</value>
+    </body>
+    <body id="1">
+      <charactor>星闲</charactor>
+      <value>好的小师妹，路上小心。</value>
+    </body>
+  </scene-village1>
 </dialogue>

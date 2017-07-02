@@ -12,6 +12,9 @@ public class MonsterWarriorController : MonoBehaviour {
     private bool isPatrolling;
 	//near the player to attack;
 	public bool NearTarget;
+    //Moster status
+    private bool MonsterIsDead;
+    private float DeadToDisappearTime;
 	//the monster next to Patrol position
     private Vector3 PatrolPosition;
 	private Vector3 StartPosition;
@@ -32,6 +35,9 @@ public class MonsterWarriorController : MonoBehaviour {
 		gameObject.GetComponent<NavMeshAgent> ().destination = PatrolPosition;
 		isPatrolling = true;
 		NearTarget = false;
+        MonsterIsDead = false;
+        DeadToDisappearTime = 3.0f;
+
 	}
 
     // Update is called once per frame
@@ -46,6 +52,17 @@ public class MonsterWarriorController : MonoBehaviour {
 		} else {
 			MonsterAttack ();
 		}
+        Debug.Log(MonsterIsDead);
+        if (MonsterIsDead)
+        {
+            if (DeadToDisappearTime > 0.0f)
+            {
+                DeadToDisappearTime -= Time.deltaTime;
+            }
+            else {
+                MonsterToDelete();
+            }
+        }
 
     }
 
@@ -128,7 +145,7 @@ public class MonsterWarriorController : MonoBehaviour {
     }
 
 	private bool MonsterIsMoving(){
-		if (Vector3.Distance (gameObject.transform.position, PatrolPosition) > 0.1f) {
+		if (Vector3.Distance (gameObject.transform.position, PatrolPosition) > 0.3f) {
 			return true;
 		} else {
 			Debug.Log ("Turn Round");
@@ -182,6 +199,46 @@ public class MonsterWarriorController : MonoBehaviour {
         if (other.tag == "PlayerWeapon")
         {
             Debug.Log("Monster is Attack");
+            //MonsterIsDead = true;
+            isPatrolling = false;
+            StartCoroutine(MonsterDamaged());
         }
+    }
+
+    private IEnumerator MonsterDamaged() {
+        if (MonsterIsDead)
+        {
+            if (gameObject.GetComponent<NavMeshAgent>().enabled)
+            {
+                gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            }
+            MonsterAnimator.SetBool("Run", false);
+            //MonsterAnimator.SetTrigger("Dead");
+            /*if (gameObject.GetComponent<MonsterWarriorController>().enabled) {
+                gameObject.GetComponent<MonsterWarriorController>().enabled = false;
+            }*/
+            if (gameObject.GetComponent<CapsuleCollider>().enabled)
+            {
+                MonsterAnimator.SetTrigger("Dead");
+                gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            }
+            
+            yield return new WaitForSeconds(2.0f);
+        }
+        else
+        {
+            Debug.Log("MonsterDamage");
+            if (gameObject.GetComponent<NavMeshAgent>().enabled)
+            {
+                gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            }
+            MonsterAnimator.SetBool("Run", false);
+            MonsterAnimator.SetTrigger("Damage");
+            yield return new WaitForSeconds(1.0f);
+        }
+
+    }
+    private void MonsterToDelete() {
+        Destroy(gameObject);
     }
 }

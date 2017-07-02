@@ -4,4 +4,22 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/backyard.unity
+    guid: 72b3c438242344d13b0a30d8ae859ff1
+  - enabled: 1
+    path: Assets/Scenes/village.unity
+    guid: 93d95fe43b7dd4811839617620105dd2
+  - enabled: 1
+    path: Assets/Scenes/home.unity
+    guid: fa490e38195234880a17c1dbb878280f
+  - enabled: 1
+    path: Assets/Scenes/field01.unity
+    guid: d191cb2afdd55453a81b7ea2e440fef0
+  - enabled: 1
+    path: Assets/Scenes/field02.unity
+    guid: eaa5762cdb29144f4a81d0f4e4c7bfed
+  - enabled: 1
+    path: Assets/Scenes/field03.unity
+    guid: e29ed6c67ccf742f5b0218d771683421

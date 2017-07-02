@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 /// <summary>
 /// attach to GameObject TransportUI
 /// </summary>
@@ -24,7 +25,7 @@ public class TransportController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (SelectedButton) {
+        if (SelectedButton) {
 			newColor.a = 0.6f;
 			LeaveButton.GetComponent<Image> ().color = newColor;
 			newColor.a = 0.3f;
@@ -49,6 +50,7 @@ public class TransportController : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Return)){
 			if (SelectedButton) {
 				Debug.Log ("跳转到下一个场景。");
+                NextSceneToLoad();
 			} else {
 				if(gameObject.activeSelf){
 					gameObject.SetActive (false);
@@ -58,6 +60,33 @@ public class TransportController : MonoBehaviour {
 		}
 	}
 
+    //switch to the next scene
+    private void NextSceneToLoad()
+    {
+        switch (Application.loadedLevelName)
+        {
+            case "backyard":
+                SceneManager.LoadScene("field01");
+                break;
+            case "field01":
+                SceneManager.LoadScene("home");
+                break;
+            case "home":
+                SceneManager.LoadScene("field02");
+                break;
+            case "field02":
+                SceneManager.LoadScene("village");
+                break;
+            case "village":
+                SceneManager.LoadScene("field03");
+                break;
+            case "field03":
+                SceneManager.LoadScene("backyard");
+                break;
+            default:
+                break;
+        }
+    }
 
 
 

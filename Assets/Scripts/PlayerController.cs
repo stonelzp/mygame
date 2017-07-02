@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 	public GameObject Particle01;
 	public GameObject Particle02;
 	public GameObject Particle03;
+    //Player Objecj: W_Bone
+    public GameObject ObjectWeaponCollider;
 
 
 	private Animation AnimationPlay;
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
 	private uint status_dodge=256;//0001 0000 0000
 	private uint status_attack_skill02=512;//0010 0000 0000
 	private uint status_jump=1024;//0100 0000 0000
+    private uint status_attack_skill01 =2048;//1000 0000 0000
 	//private uint status_damage03=2048;//1000 0000 0000
 
 
@@ -93,10 +96,15 @@ public class PlayerController : MonoBehaviour
 		if((PlayerStatus&status_jump)==status_jump && interval>0.0f){
 			jump_movement ();
 		}
-		//damage movement controller
-//		if((PlayerStatus&status_damage03)==status_damage03 && interval>0.0f){
-//			damage_movement ();
-//		}
+        //damage movement controller
+        //		if((PlayerStatus&status_damage03)==status_damage03 && interval>0.0f){
+        //			damage_movement ();
+        //		}
+
+        //attack skill01 collider controll when interval>0.1f set collider to enable
+        if ((PlayerStatus & status_attack_skill01) == status_attack_skill01 && interval > 0.1f) {
+            AttackColliderController();
+        }
 
 
 			
@@ -107,8 +115,9 @@ public class PlayerController : MonoBehaviour
 	}
 	void LateUpdate ()
 	{
-		//camera
-	}
+        Debug.Log(PlayerStatus);
+        //camera
+    }
 
 	void playAnimation(string AnimationName){
 		switch (AnimationName) {
@@ -346,7 +355,8 @@ public class PlayerController : MonoBehaviour
 		}
 		if(Input.GetKeyDown(KeyCode.J)){
 			if((PlayerStatus&status_battle)==status_battle){
-				playAnimation ("Skill01");
+                PlayerStatus = (uint)(PlayerStatus | status_attack_skill01);
+                playAnimation ("Skill01");
 			}
 		}
 		if(Input.GetKeyDown(KeyCode.K)){
@@ -711,7 +721,7 @@ public class PlayerController : MonoBehaviour
 	void dodge_movement(){
 		//warn:it should not exit number 0.75
 		//
-		if(interval>0.2f){
+		if(interval<=0.2f){
 			PlayerStatus = (uint)(PlayerStatus & (uint)~status_dodge);
 		}
 		switch(direction_value_now){
@@ -747,7 +757,7 @@ public class PlayerController : MonoBehaviour
 	}
 	//attack movement controller
 	void attack_movement(){
-		if (interval > 0.2f) {
+		if (interval <= 0.2f) {
 			PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill02);
 		}
 		switch (direction_value_now) {
@@ -831,6 +841,26 @@ public class PlayerController : MonoBehaviour
 //			}
 //		}
 	//}
+
+    private void AttackColliderController()
+    {
+        if (interval <= 0.2f) {
+            PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill01);
+            if (ObjectWeaponCollider.GetComponent<CapsuleCollider>().enabled)
+            {
+                ObjectWeaponCollider.GetComponent<CapsuleCollider>().enabled = false;
+            }
+        }
+        if (!ObjectWeaponCollider.GetComponent<CapsuleCollider>().enabled)
+        {
+            ObjectWeaponCollider.GetComponent<CapsuleCollider>().enabled = true;
+        }
+    }
+
+
+
+
+
 	void particle02Play(){
 		if (!Particle02.activeSelf) {
 			Particle02.SetActive (true);
