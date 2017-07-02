@@ -174,4 +174,14 @@ public class MonsterWarriorController : MonoBehaviour {
 		yield return new WaitForSeconds(1.5f);
 	}
 
+
+    //when mosnter is attacked
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("MonsterTrigger");
+        if (other.tag == "PlayerWeapon")
+        {
+            Debug.Log("Monster is Attack");
+        }
+    }
 }
