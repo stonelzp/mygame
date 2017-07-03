@@ -5,7 +5,6 @@ public class DialogueTrigger : MonoBehaviour {
 	public GameObject Player;
 	public GameObject NPCPlayer;
 	public GameObject DialogueCanvas;
-
 	private string DialogueSceneName;
 	// Use this for initialization
 	void Start () {

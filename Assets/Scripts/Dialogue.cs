@@ -11,6 +11,11 @@ public class Dialogue : MonoBehaviour {
 	public GameObject DialogueCanvas;
 	public GameObject Player;
 	public GameObject NPCPlayer;
+	public GameObject CharactorPicture;
+	public Sprite spritePlayer;
+	public Sprite spriteArcher;
+	public Sprite spriteMage01;
+	public Sprite spriteMage02;
 
 	private string[] dialogue_strings;
 	private Text _textComponent;
@@ -103,6 +108,15 @@ public class Dialogue : MonoBehaviour {
 		DialogueIsDisplaying = true;
 		_textComponent.text = "";
 		_textCharactor.text = stringCharactor;
+		if (stringCharactor == "星莲") {
+			CharactorPicture.GetComponent<Image> ().sprite = spritePlayer;
+		} else if (stringCharactor == "星白") {
+			CharactorPicture.GetComponent<Image> ().sprite = spriteArcher;
+		} else if (stringCharactor == "星闲") {
+			CharactorPicture.GetComponent<Image> ().sprite = spriteMage01;
+		} else if (stringCharactor == "星月") {
+			CharactorPicture.GetComponent<Image> ().sprite = spriteMage02;
+		}
 		while (currentStringIndex < stringLength) {
 			_textComponent.text += stringToDisplay [currentStringIndex];
 			currentStringIndex++;
