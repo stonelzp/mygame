@@ -104,6 +104,7 @@ public class Dialogue : MonoBehaviour {
 //		Debug.Log (stringToDisplay);
 //		Debug.Log (stringCharactor);
 		int stringLength = stringToDisplay.Length;
+		print (stringLength);
 		int currentStringIndex = 0;
 		DialogueIsDisplaying = true;
 		_textComponent.text = "";
@@ -118,6 +119,10 @@ public class Dialogue : MonoBehaviour {
 			CharactorPicture.GetComponent<Image> ().sprite = spriteMage02;
 		}
 		while (currentStringIndex < stringLength) {
+			//text is overflow
+			if (_textComponent.text.Length >= 42) {
+				_textComponent.text = "";
+			}
 			_textComponent.text += stringToDisplay [currentStringIndex];
 			currentStringIndex++;
 			if (currentStringIndex < stringLength) {
