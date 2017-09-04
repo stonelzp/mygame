@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44787455, g: 0.49786675, b: 0.5754603, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6718,7 +6718,7 @@ Transform:
   - {fileID: 939518128}
   - {fileID: 1725435677}
   m_Father: {fileID: 877490607}
-  m_RootOrder: 210
+  m_RootOrder: 117
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &660666382
 Prefab:
@@ -8713,6 +8713,7 @@ Transform:
   - {fileID: 1958493911}
   - {fileID: 38569540}
   - {fileID: 1064332308}
+  - {fileID: 659949563}
   - {fileID: 2146512611}
   - {fileID: 115829955}
   - {fileID: 1143631525}
@@ -8802,11 +8803,10 @@ Transform:
   - {fileID: 166155009}
   - {fileID: 522502923}
   - {fileID: 2109751185}
-  - {fileID: 1692441532}
   - {fileID: 7101768}
   - {fileID: 1499030111}
   - {fileID: 450396053}
-  - {fileID: 659949563}
+  - {fileID: 1692441532}
   - {fileID: 72764680}
   - {fileID: 19601659}
   - {fileID: 1121985630}
@@ -18898,6 +18898,11 @@ Prefab:
       propertyPath: AttackTarget
       value: 
       objectReference: {fileID: 7058147}
+    - target: {fileID: 136000011207082656, guid: 96b478f7e1fd27341beb9950e9511979,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96b478f7e1fd27341beb9950e9511979, type: 2}
   m_IsPrefabParent: 0

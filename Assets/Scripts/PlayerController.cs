@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
 		}
 		//attack skill02  movement controller
 		if((PlayerStatus&status_attack_skill02)==status_attack_skill02 && interval>0.0f){
-			attack_movement ();
+			attack02_movement ();
 			Attack02ColliderController();
 			if (interval <= 0.1f) {
 				PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill02);
@@ -108,7 +108,10 @@ public class PlayerController : MonoBehaviour
         //attack skill01 collider controll when interval>0.1f set collider to enable
         if ((PlayerStatus & status_attack_skill01) == status_attack_skill01 && interval > 0.1f) {
             Attack01ColliderController();
-        }
+			if (interval <= 0.15f) {
+				PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill01);//状态参数的恢复我觉得最好在update函数里面跟随着interval一起只有一次的统一恢复的比较好
+			}
+        }	
 		//attack skill02 collider controll when interval>0.1f set collider to enable
 		/*if((PlayerStatus & status_attack_skill02) == status_attack_skill02 && interval > 0.1f){
 			Attack02ColliderController();
@@ -235,7 +238,7 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay.CrossFade ("Skill01", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
 			interval = (AnimationPlay ["Skill01"].length / AnimationPlay ["Skill01"].speed) * 0.98f;
-			//Debug.Log ("skill01 interval"+interval);
+			Debug.Log ("skill01 interval"+interval);//1.306s
 			break;
 		case "Skill02":
 			AnimationPlay ["Skill02"].wrapMode = WrapMode.Once;
@@ -730,6 +733,7 @@ public class PlayerController : MonoBehaviour
 	void dodge_movement(){
 		//warn:it should not exit number 0.75
 		//
+
 		if(interval<=0.2f){
 			PlayerStatus = (uint)(PlayerStatus & (uint)~status_dodge);
 		}
@@ -764,39 +768,41 @@ public class PlayerController : MonoBehaviour
 		}
 		
 	}
-	//attack movement controller
-	void attack_movement(){
-//		if (interval <= 0.2f) {
-//			PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill02);
-//		}
-		switch (direction_value_now) {
-		case 1:
-			PlayerRigidbody.velocity = new Vector3 (3.0f,0.0f,0.0f);
-			break;
-		case 2:
-			PlayerRigidbody.velocity = new Vector3 (-3.0f,0.0f,0.0f);
-			break;
-		case 4:
-			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,3.0f);
-			break;
-		case 5:
-			PlayerRigidbody.velocity = new Vector3 (1.732f,0.0f,1.732f);
-			break;
-		case 6:
-			PlayerRigidbody.velocity = new Vector3 (-1.732f,0.0f,1.732f);
-			break;
-		case 8:
-			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,-3.0f);
-			break;
-		case 9:
-			PlayerRigidbody.velocity = new Vector3 (1.732f,0.0f,-1.732f);
-			break;
-		case 10:
-			PlayerRigidbody.velocity = new Vector3 (-1.732f,0.0f,-1.732f);
-			break;
+	//attack02 movement controller
+	void attack02_movement(){
+		if (interval >= 0.8f) {
+			float movement = 1.0f;
+			switch (direction_value_now) {
+			case 1:
+				PlayerRigidbody.velocity = new Vector3 (movement, 0.0f, 0.0f);
+				break;
+			case 2:
+				PlayerRigidbody.velocity = new Vector3 (-movement, 0.0f, 0.0f);
+				break;
+			case 4:
+				PlayerRigidbody.velocity = new Vector3 (0.0f, 0.0f, movement);
+				break;
+			case 5:
+				PlayerRigidbody.velocity = new Vector3 (movement * 0.707f, 0.0f, movement * 0.707f);
+				break;
+			case 6:
+				PlayerRigidbody.velocity = new Vector3 (-movement * 0.707f, 0.0f, movement * 0.707f);
+				break;
+			case 8:
+				PlayerRigidbody.velocity = new Vector3 (0.0f, 0.0f, -movement);
+				break;
+			case 9:
+				PlayerRigidbody.velocity = new Vector3 (movement * 0.707f, 0.0f, -movement * 0.707f);
+				break;
+			case 10:
+				PlayerRigidbody.velocity = new Vector3 (-movement * 0.707f, 0.0f, -movement * 0.707f);
+				break;
 
-		default:
-			break;
+			default:
+				break;
+			}
+		} else {
+			PlayerRigidbody.velocity = new Vector3 (0.0f, 0.0f, 0.0f);
 		}
 	}
 	//jump movement controller
@@ -851,14 +857,15 @@ public class PlayerController : MonoBehaviour
 //		}
 	//}
 
+	//当攻击的时候激活武器的碰撞体相应的时间然后取消碰撞
     private void Attack01ColliderController()
     {
-		if (interval <= 0.2f) {
-			PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill01);
+		if (interval <= 0.52f) {
+			//PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill01);
 			if (ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled) {
 				ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled = false;
 			}
-		} else if(interval<0.75f){//这个地方放数字是不对的需要之后找一个参数代替
+		} else if(interval<0.86f){//这个地方放数字是不对的需要之后找一个参数代替
 			if (!ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled) {
 				ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled = true;
 			}
