@@ -91,6 +91,10 @@ public class PlayerController : MonoBehaviour
 		//attack skill02  movement controller
 		if((PlayerStatus&status_attack_skill02)==status_attack_skill02 && interval>0.0f){
 			attack_movement ();
+			Attack02ColliderController();
+			if (interval <= 0.1f) {
+				PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill02);
+			}
 		}
 		//jump movement controller
 		if((PlayerStatus&status_jump)==status_jump && interval>0.0f){
@@ -103,9 +107,12 @@ public class PlayerController : MonoBehaviour
 
         //attack skill01 collider controll when interval>0.1f set collider to enable
         if ((PlayerStatus & status_attack_skill01) == status_attack_skill01 && interval > 0.1f) {
-            AttackColliderController();
+            Attack01ColliderController();
         }
-
+		//attack skill02 collider controll when interval>0.1f set collider to enable
+		/*if((PlayerStatus & status_attack_skill02) == status_attack_skill02 && interval > 0.1f){
+			Attack02ColliderController();
+		}*/
 
 			
 		//time controll,some animation can not be interrupted
@@ -227,13 +234,15 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay ["Skill01"].wrapMode = WrapMode.Once;
 			AnimationPlay.CrossFade ("Skill01", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
-			interval=(AnimationPlay ["Skill01"].length / AnimationPlay ["Skill01"].speed) * 0.98f;
+			interval = (AnimationPlay ["Skill01"].length / AnimationPlay ["Skill01"].speed) * 0.98f;
+			//Debug.Log ("skill01 interval"+interval);
 			break;
 		case "Skill02":
 			AnimationPlay ["Skill02"].wrapMode = WrapMode.Once;
 			AnimationPlay.CrossFade ("Skill02", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
 			interval=(AnimationPlay ["Skill02"].length / AnimationPlay ["Skill02"].speed) * 0.98f;
+			Debug.Log ("skill02 interval"+interval);//1.568s
 			break;
 		case "Skill03":
 			AnimationPlay ["Skill03"].wrapMode = WrapMode.Once;
@@ -347,19 +356,19 @@ public class PlayerController : MonoBehaviour
 				playAnimation ("Level_Up");
 			}
 		}
-		//skill 
+		//skill Attack
 		if(Input.GetKeyDown(KeyCode.F)){
 			if((PlayerStatus&status_battle)==status_battle){
 				playAnimation ("Skill03");
 			}
 		}
-		if(Input.GetKeyDown(KeyCode.J)){
+		if(Input.GetKeyDown(KeyCode.J)){//Attack01
 			if((PlayerStatus&status_battle)==status_battle){
                 PlayerStatus = (uint)(PlayerStatus | status_attack_skill01);
                 playAnimation ("Skill01");
 			}
 		}
-		if(Input.GetKeyDown(KeyCode.K)){
+		if(Input.GetKeyDown(KeyCode.K)){//Attack02
 			if((PlayerStatus&status_battle)==status_battle){
 				PlayerStatus = (uint)(PlayerStatus | status_attack_skill02);
 				playAnimation ("Skill02");
@@ -757,9 +766,9 @@ public class PlayerController : MonoBehaviour
 	}
 	//attack movement controller
 	void attack_movement(){
-		if (interval <= 0.2f) {
-			PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill02);
-		}
+//		if (interval <= 0.2f) {
+//			PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill02);
+//		}
 		switch (direction_value_now) {
 		case 1:
 			PlayerRigidbody.velocity = new Vector3 (3.0f,0.0f,0.0f);
@@ -842,20 +851,31 @@ public class PlayerController : MonoBehaviour
 //		}
 	//}
 
-    private void AttackColliderController()
+    private void Attack01ColliderController()
     {
-        if (interval <= 0.2f) {
-            PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill01);
-            if (ObjectWeaponCollider.GetComponent<CapsuleCollider>().enabled)
-            {
-                ObjectWeaponCollider.GetComponent<CapsuleCollider>().enabled = false;
-            }
-        }
-        if (!ObjectWeaponCollider.GetComponent<CapsuleCollider>().enabled)
-        {
-            ObjectWeaponCollider.GetComponent<CapsuleCollider>().enabled = true;
-        }
+		if (interval <= 0.2f) {
+			PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill01);
+			if (ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled) {
+				ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled = false;
+			}
+		} else if(interval<0.75f){//这个地方放数字是不对的需要之后找一个参数代替
+			if (!ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled) {
+				ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled = true;
+			}
+		}
     }
+	private void Attack02ColliderController(){
+		if (interval <= 0.8f) {
+			//PlayerStatus = (uint)(PlayerStatus & (uint)~status_attack_skill02);
+			if (ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled) {
+				ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled = false;
+			}
+		} else if(interval<1.05f){//这个地方放数字是不对的需要之后找一个参数代替
+			if (!ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled) {
+				ObjectWeaponCollider.GetComponent<CapsuleCollider> ().enabled = true;
+			}
+		}
+	}
 
 
 

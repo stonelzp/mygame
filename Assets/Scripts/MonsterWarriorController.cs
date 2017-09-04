@@ -6,8 +6,13 @@ using UnityEngine.AI;
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class MonsterWarriorController : MonoBehaviour {
+	//when we to initial a monster,we should add Player to this AttackTarget
     public Transform AttackTarget;
-    
+    //set the patrol position/direction to this monster
+	public float PatrolDirection_x;
+	public float PatrolDirection_z;
+
+
     private Animator MonsterAnimator;
     private bool isPatrolling;
 	//near the player to attack;
@@ -30,7 +35,7 @@ public class MonsterWarriorController : MonoBehaviour {
         MonsterAnimator = gameObject.GetComponent<Animator>();
 		StartPosition = gameObject.transform.position;
         //set the monster patrol position
-		PatrolPosition=new Vector3 (transform.position.x,transform.position.y,transform.position.z-15.0f);
+		PatrolPosition=new Vector3 (transform.position.x + PatrolDirection_x,transform.position.y,transform.position.z + PatrolDirection_z);
 		EndPosition = PatrolPosition;
 		gameObject.GetComponent<NavMeshAgent> ().destination = PatrolPosition;
 		isPatrolling = true;
@@ -199,7 +204,7 @@ public class MonsterWarriorController : MonoBehaviour {
         if (other.tag == "PlayerWeapon")
         {
             Debug.Log("Monster is Attack");
-            //MonsterIsDead = true;
+            MonsterIsDead = true;
             isPatrolling = false;
             StartCoroutine(MonsterDamaged());
         }
