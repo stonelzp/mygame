@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour
 		//play the default animation
 		AnimationPlay.playAutomatically=true;
 		interval = 0.0f;
+		//initialize direction_value_now value
+		direction_value_now = direction_left;
 
 	}
 	// Update is called once per frame
@@ -263,13 +265,14 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.0f);
 			interval = (AnimationPlay ["MagicAttack_B"].length / AnimationPlay ["MagicAttack_B"].speed + AnimationPlay ["MagicAttack_M"].length / AnimationPlay ["MagicAttack_M"].speed + AnimationPlay ["MagicAttack_E"].length / AnimationPlay ["MagicAttack_E"].speed);
 			//magic particle
-			if (!Particle01.activeSelf) {
-				Particle01.SetActive (true);
-			} else {
-				Particle01.SetActive (false);
-				Particle01.SetActive (true);
-			}
-			Invoke ("particle02Play",1.5f);
+			particleEffectManagement(1);
+//			if (!Particle01.activeSelf) {
+//				Particle01.SetActive (true);
+//			} else {
+//				Particle01.SetActive (false);
+//				Particle01.SetActive (true);
+//			}
+//			Invoke ("particle02Play",1.5f);
 			break;
 		case "Normal_Talk":
 			AnimationPlay ["Normal_Talk"].wrapMode = WrapMode.Loop;
@@ -884,7 +887,38 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	private void particleEffectManagement(int AttackParticleNum){
+		switch(AttackParticleNum){
+		case 1:
+			//Attack01 skill particle effect
+			float OffsetX01 = -0.732f;
+			float OffsetY01 = 1.132f;
+			float OffsetZ01 = -0.36f;
+			Vector3 A_P01 = new Vector3(0.0f,0.0f,0.0f);
+			if(direction_value_now == direction_left){
+				A_P01 = new Vector3 (gameObject.transform.position.x + OffsetX01, gameObject.transform.position.y + OffsetY01, gameObject.transform.position.z + OffsetZ01);
+			}
 
+
+
+			GameObject AttackParticle01 = Instantiate (Particle01, A_P01, Quaternion.identity);
+			StartCoroutine (GameobjectDestory (AttackParticle01));
+			break;
+		default:
+			break;
+
+		}
+	}
+
+
+
+
+	private IEnumerator GameobjectDestory(GameObject objectname){
+		float delaytime = 2.0f;
+		yield return new WaitForSeconds (delaytime);
+		Destroy (objectname);
+
+	}
 
 
 
