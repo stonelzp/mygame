@@ -894,14 +894,39 @@ public class PlayerController : MonoBehaviour
 			float OffsetX01 = -0.732f;
 			float OffsetY01 = 1.132f;
 			float OffsetZ01 = -0.36f;
+            Vector3 V = new Vector3(OffsetX01, OffsetY01, OffsetZ01);
 			Vector3 A_P01 = new Vector3(0.0f,0.0f,0.0f);
-			if(direction_value_now == direction_left){
-				A_P01 = new Vector3 (gameObject.transform.position.x + OffsetX01, gameObject.transform.position.y + OffsetY01, gameObject.transform.position.z + OffsetZ01);
-			}
+                if (direction_value_now == direction_left)
+                {
+                    //A_P01 = new Vector3 (gameObject.transform.position.x + V.x, gameObject.transform.position.y + V.y, gameObject.transform.position.z + V.z);
+                }
+                else if (direction_value_now == direction_right)
+                {
+                    V = Quaternion.AngleAxis(180, Vector3.up) * V;
+                }
+                else if (direction_value_now == direction_up)
+                {
+                    V = Quaternion.AngleAxis(90, Vector3.up) * V;
+                }
+                else if (direction_value_now == direction_down) {
+                    V = Quaternion.AngleAxis(270, Vector3.up) * V;
+                }else if(direction_value_now == direction_left_up)
+                {
+                    V = Quaternion.AngleAxis(45, Vector3.up) * V;
+                }else if(direction_value_now == direction_right_up)
+                {
+                    V = Quaternion.AngleAxis(135, Vector3.up) * V;
+                }else if(direction_value_now == direction_right_down)
+                {
+                    V = Quaternion.AngleAxis(225, Vector3.up) * V;
+                }else if(direction_value_now == direction_left_down)
+                {
+                    V = Quaternion.AngleAxis(315, Vector3.up) * V;
+                }
 
 
-
-			GameObject AttackParticle01 = Instantiate (Particle01, A_P01, Quaternion.identity);
+                A_P01 = new Vector3(gameObject.transform.position.x + V.x, gameObject.transform.position.y + V.y, gameObject.transform.position.z + V.z);
+                GameObject AttackParticle01 = Instantiate (Particle01, A_P01, Quaternion.identity);
 			StartCoroutine (GameobjectDestory (AttackParticle01));
 			break;
 		default:
