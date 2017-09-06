@@ -265,7 +265,11 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.0f);
 			interval = (AnimationPlay ["MagicAttack_B"].length / AnimationPlay ["MagicAttack_B"].speed + AnimationPlay ["MagicAttack_M"].length / AnimationPlay ["MagicAttack_M"].speed + AnimationPlay ["MagicAttack_E"].length / AnimationPlay ["MagicAttack_E"].speed);
 			//magic particle
-			particleEffectManagement(1);
+			//particleEffectManagement(1);
+            skillManagement("MagicSkill01");
+
+
+
 //			if (!Particle01.activeSelf) {
 //				Particle01.SetActive (true);
 //			} else {
@@ -886,7 +890,22 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 	}
+    //技能管理器，释放技能的时候调用
+    private void skillManagement(string SkillName)
+    {
+        switch (SkillName)
+        {
+            case "MagicSkill01":
+                particleEffectManagement(1);
+                StartCoroutine(delayToPlayParticle02());
+                break;
+            default:
+                break;
+        }
+    }
 
+
+    //粒子特效管理器，当需要播放某个粒子特效的时候调用
 	private void particleEffectManagement(int AttackParticleNum){
 		switch(AttackParticleNum){
 		case 1:
@@ -894,52 +913,77 @@ public class PlayerController : MonoBehaviour
 			float OffsetX01 = -0.732f;
 			float OffsetY01 = 1.132f;
 			float OffsetZ01 = -0.36f;
-            Vector3 V = new Vector3(OffsetX01, OffsetY01, OffsetZ01);
-			Vector3 A_P01 = new Vector3(0.0f,0.0f,0.0f);
-                if (direction_value_now == direction_left)
-                {
-                    //A_P01 = new Vector3 (gameObject.transform.position.x + V.x, gameObject.transform.position.y + V.y, gameObject.transform.position.z + V.z);
-                }
-                else if (direction_value_now == direction_right)
-                {
-                    V = Quaternion.AngleAxis(180, Vector3.up) * V;
-                }
-                else if (direction_value_now == direction_up)
-                {
-                    V = Quaternion.AngleAxis(90, Vector3.up) * V;
-                }
-                else if (direction_value_now == direction_down) {
-                    V = Quaternion.AngleAxis(270, Vector3.up) * V;
-                }else if(direction_value_now == direction_left_up)
-                {
-                    V = Quaternion.AngleAxis(45, Vector3.up) * V;
-                }else if(direction_value_now == direction_right_up)
-                {
-                    V = Quaternion.AngleAxis(135, Vector3.up) * V;
-                }else if(direction_value_now == direction_right_down)
-                {
-                    V = Quaternion.AngleAxis(225, Vector3.up) * V;
-                }else if(direction_value_now == direction_left_down)
-                {
-                    V = Quaternion.AngleAxis(315, Vector3.up) * V;
-                }
-
-
-                A_P01 = new Vector3(gameObject.transform.position.x + V.x, gameObject.transform.position.y + V.y, gameObject.transform.position.z + V.z);
+                //Vector3 V = new Vector3(OffsetX01, OffsetY01, OffsetZ01);
+                Vector3 A_P01 = getTargetParticlePosotion(OffsetX01, OffsetY01, OffsetZ01);
                 GameObject AttackParticle01 = Instantiate (Particle01, A_P01, Quaternion.identity);
-			StartCoroutine (GameobjectDestory (AttackParticle01));
+			StartCoroutine (GameobjectDestory (AttackParticle01,2.0f));
 			break;
+            case 2:
+                //Attack01 skill particle effect
+                float OffsetX02 = -2.331f;
+                float OffsetY02 = 1.173f;
+                float OffsetZ02 = -0.089f;
+                Vector3 A_P02 = getTargetParticlePosotion(OffsetX02, OffsetY02, OffsetZ02);
+                //Vector3 V2 = new Vector3(OffsetX02, OffsetY02, OffsetZ02);
+                //Attack02 skill particle effect
+                GameObject AttackParticle02 = Instantiate(Particle02,A_P02,Quaternion.identity);
+                //StartCoroutine(doAttack02ParticleEffect());
+                break;
 		default:
 			break;
 
 		}
 	}
+    //
+    private Vector3 getTargetParticlePosotion(float OffsetX,float OffsetY,float OffsetZ)
+    {
+        Vector3 V = new Vector3(OffsetX, OffsetY, OffsetZ);
+        Vector3 A_P = new Vector3(0.0f, 0.0f, 0.0f);
+        if (direction_value_now == direction_left)
+        {
+            //A_P01 = new Vector3 (gameObject.transform.position.x + V.x, gameObject.transform.position.y + V.y, gameObject.transform.position.z + V.z);
+        }
+        else if (direction_value_now == direction_right)
+        {
+            V = Quaternion.AngleAxis(180, Vector3.up) * V;
+        }
+        else if (direction_value_now == direction_up)
+        {
+            V = Quaternion.AngleAxis(90, Vector3.up) * V;
+        }
+        else if (direction_value_now == direction_down)
+        {
+            V = Quaternion.AngleAxis(270, Vector3.up) * V;
+        }
+        else if (direction_value_now == direction_left_up)
+        {
+            V = Quaternion.AngleAxis(45, Vector3.up) * V;
+        }
+        else if (direction_value_now == direction_right_up)
+        {
+            V = Quaternion.AngleAxis(135, Vector3.up) * V;
+        }
+        else if (direction_value_now == direction_right_down)
+        {
+            V = Quaternion.AngleAxis(225, Vector3.up) * V;
+        }
+        else if (direction_value_now == direction_left_down)
+        {
+            V = Quaternion.AngleAxis(315, Vector3.up) * V;
+        }
+        A_P = new Vector3(gameObject.transform.position.x + V.x, gameObject.transform.position.y + V.y, gameObject.transform.position.z + V.z);
+        return A_P;
+    }
 
 
+    private IEnumerator delayToPlayParticle02()
+    {
+        yield return new WaitForSeconds(1.5f);
+        particleEffectManagement(2);
+    }
 
-
-	private IEnumerator GameobjectDestory(GameObject objectname){
-		float delaytime = 2.0f;
+    //after delaytime destory the gameobject 
+	private IEnumerator GameobjectDestory(GameObject objectname, float delaytime){
 		yield return new WaitForSeconds (delaytime);
 		Destroy (objectname);
 
