@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
 	private uint status_zero = 0;//0000 0000 0000 0000 0000 0000 0000 0000
 	private uint status_run = 16;//0001 0000
 	private uint status_battle = 32;//0010 0000
+	//进入战斗状态之后，又进入了视角锁定状态
 	private uint status_lock = 64;//0100 0000
 	private uint status_lock_battle=96;//0110 0000
 	private uint status_run_attack=128;//1000 0000
@@ -50,7 +51,6 @@ public class PlayerController : MonoBehaviour
 	private uint status_attack_skill02=512;//0010 0000 0000
 	private uint status_jump=1024;//0100 0000 0000
     private uint status_attack_skill01 =2048;//1000 0000 0000
-	//private uint status_damage03=2048;//1000 0000 0000
 
 
 
@@ -82,13 +82,22 @@ public class PlayerController : MonoBehaviour
 		if(interval<=0.0f){
 			statuscontroller ();
 		}
+
+
+
 		//skill run attack movement controller
 		if((PlayerStatus&status_run_attack)==status_run_attack && interval>0.0f){
 			run_attack_movement ();
+			if (interval <= 0.75f) {
+				PlayerStatus = (uint)(PlayerStatus & (uint)~status_run_attack);
+			}
 		}
 		//skill dodge movement controller
 		if((PlayerStatus&status_dodge)==status_dodge && interval>0.0f){
 			dodge_movement ();
+			if(interval<=0.1f){
+				PlayerStatus = (uint)(PlayerStatus & (uint)~status_dodge);
+			}
 		}
 		//attack skill02  movement controller
 		if((PlayerStatus&status_attack_skill02)==status_attack_skill02 && interval>0.0f){
@@ -101,11 +110,11 @@ public class PlayerController : MonoBehaviour
 		//jump movement controller
 		if((PlayerStatus&status_jump)==status_jump && interval>0.0f){
 			jump_movement ();
+			if (interval <= 1.0f) {
+				PlayerStatus=(uint)(PlayerStatus & (uint)~status_jump);
+			}
 		}
-        //damage movement controller
-        //		if((PlayerStatus&status_damage03)==status_damage03 && interval>0.0f){
-        //			damage_movement ();
-        //		}
+        
 
         //attack skill01 collider controll when interval>0.1f set collider to enable
         if ((PlayerStatus & status_attack_skill01) == status_attack_skill01 && interval > 0.1f) {
@@ -202,7 +211,8 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay ["Dodge"].wrapMode = WrapMode.Once;
 			AnimationPlay.CrossFade ("Dodge", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
-			interval=(AnimationPlay ["Dodge"].length / AnimationPlay ["Dodge"].speed) * 0.98f;
+			interval = (AnimationPlay ["Dodge"].length / AnimationPlay ["Dodge"].speed) * 0.98f;
+			//Debug.Log ("Dodge"+interval);//1.176s
 			break;
 		case "Damage01":
 			AnimationPlay ["Damage01"].wrapMode = WrapMode.Once;
@@ -216,12 +226,6 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay.CrossFade ("Damage02", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
 			interval=(AnimationPlay ["Damage02"].length / AnimationPlay ["Damage02"].speed) * 1.0f;
-			break;
-		case "Damage03":
-			AnimationPlay ["Damage03"].wrapMode = WrapMode.Once;
-			AnimationPlay.CrossFade ("Damage03", 0.3f);
-			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
-			interval=(AnimationPlay ["Damage03"].length / AnimationPlay ["Damage03"].speed) * 1.0f;
 			break;
 		case "Dead":
 			AnimationPlay ["Dead"].wrapMode = WrapMode.Once;
@@ -240,14 +244,14 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay.CrossFade ("Skill01", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
 			interval = (AnimationPlay ["Skill01"].length / AnimationPlay ["Skill01"].speed) * 0.98f;
-			Debug.Log ("skill01 interval"+interval);//1.306s
+			//Debug.Log ("skill01 interval"+interval);//1.306s
 			break;
 		case "Skill02":
 			AnimationPlay ["Skill02"].wrapMode = WrapMode.Once;
 			AnimationPlay.CrossFade ("Skill02", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
 			interval=(AnimationPlay ["Skill02"].length / AnimationPlay ["Skill02"].speed) * 0.98f;
-			Debug.Log ("skill02 interval"+interval);//1.568s
+			//Debug.Log ("skill02 interval"+interval);//1.568s
 			break;
 		case "Skill03":
 			AnimationPlay ["Skill03"].wrapMode = WrapMode.Once;
@@ -294,10 +298,13 @@ public class PlayerController : MonoBehaviour
 	void statuscontroller (){
 		//check is lock status
 		if (Input.GetKeyDown (KeyCode.L)) {
-			if ((PlayerStatus & status_lock) == status_lock) {
-				PlayerStatus = (uint)(PlayerStatus & (uint)~status_lock);
-			} else {
-				PlayerStatus = (uint)(PlayerStatus | status_lock);
+			//check if the status is in battle status,if it is,you can turn to lock status.
+			if((PlayerStatus & status_battle) == status_battle){
+				if ((PlayerStatus & status_lock) == status_lock) {
+					PlayerStatus = (uint)(PlayerStatus & (uint)~status_lock);
+				} else {
+					PlayerStatus = (uint)(PlayerStatus | status_lock);
+				}
 			}
 		}
 		//check is running?
@@ -348,12 +355,6 @@ public class PlayerController : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Alpha2)){
 			if((PlayerStatus&status_battle)==status_battle){
 				playAnimation ("Damage02");
-			}
-		}
-		if(Input.GetKeyDown(KeyCode.Alpha3)){
-			if((PlayerStatus&status_battle)==status_battle){
-				//PlayerStatus = (uint)(PlayerStatus | status_damage03);
-				playAnimation ("Damage03");
 			}
 		}
 		if(Input.GetKeyDown(KeyCode.Alpha0)){
@@ -704,9 +705,6 @@ public class PlayerController : MonoBehaviour
 	void run_attack_movement(){
 		//warn:it should not exit number 0.75
 		//
-		if (interval <= 0.75f) {
-			PlayerStatus = (uint)(PlayerStatus & (uint)~status_run_attack);
-		}
 		switch (direction_value_now) {
 		case 1:
 			PlayerRigidbody.velocity = new Vector3 (2.5f,0.0f,0.0f);
@@ -741,38 +739,9 @@ public class PlayerController : MonoBehaviour
 	void dodge_movement(){
 		//warn:it should not exit number 0.75
 		//
-
-		if(interval<=0.2f){
-			PlayerStatus = (uint)(PlayerStatus & (uint)~status_dodge);
-		}
-		switch(direction_value_now){
-		case 1:
-			PlayerRigidbody.velocity = new Vector3 (-4.0f,0.0f,0.0f);
-			break;
-		case 2:
-			PlayerRigidbody.velocity = new Vector3 (4.0f,0.0f,0.0f);
-			break;
-		case 4:
-			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,-4.0f);
-			break;
-		case 5:
-			PlayerRigidbody.velocity = new Vector3 (-2.828f,0.0f,-2.828f);
-			break;
-		case 6:
-			PlayerRigidbody.velocity = new Vector3 (2.828f,0.0f,-2.828f);
-			break;
-		case 8:
-			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,4.0f);
-			break;
-		case 9:
-			PlayerRigidbody.velocity = new Vector3 (-2.828f,0.0f,2.828f);
-			break;
-		case 10:
-			PlayerRigidbody.velocity = new Vector3 (2.828f,0.0f,2.828f);
-			break;
-
-		default:
-			break;
+		if (interval >= 0.76) {
+			float movement = -2.0f;
+			playerMovement (movement);
 		}
 		
 	}
@@ -780,44 +749,13 @@ public class PlayerController : MonoBehaviour
 	void attack02_movement(){
 		if (interval >= 0.8f) {
 			float movement = 1.0f;
-			switch (direction_value_now) {
-			case 1:
-				PlayerRigidbody.velocity = new Vector3 (movement, 0.0f, 0.0f);
-				break;
-			case 2:
-				PlayerRigidbody.velocity = new Vector3 (-movement, 0.0f, 0.0f);
-				break;
-			case 4:
-				PlayerRigidbody.velocity = new Vector3 (0.0f, 0.0f, movement);
-				break;
-			case 5:
-				PlayerRigidbody.velocity = new Vector3 (movement * 0.707f, 0.0f, movement * 0.707f);
-				break;
-			case 6:
-				PlayerRigidbody.velocity = new Vector3 (-movement * 0.707f, 0.0f, movement * 0.707f);
-				break;
-			case 8:
-				PlayerRigidbody.velocity = new Vector3 (0.0f, 0.0f, -movement);
-				break;
-			case 9:
-				PlayerRigidbody.velocity = new Vector3 (movement * 0.707f, 0.0f, -movement * 0.707f);
-				break;
-			case 10:
-				PlayerRigidbody.velocity = new Vector3 (-movement * 0.707f, 0.0f, -movement * 0.707f);
-				break;
-
-			default:
-				break;
-			}
+			playerMovement (movement);
 		} else {
 			PlayerRigidbody.velocity = new Vector3 (0.0f, 0.0f, 0.0f);
 		}
 	}
 	//jump movement controller
 	void jump_movement(){
-		if (interval <= 1.0f) {
-			PlayerStatus=(uint)(PlayerStatus & (uint)~status_jump);
-		}
 		switch (direction_value_now) {
 		case 1:
 			PlayerRigidbody.velocity = new Vector3 (2.0f, 0.0f, 0.0f);
@@ -851,19 +789,38 @@ public class PlayerController : MonoBehaviour
 			PlayerRigidbody.velocity=PlayerRigidbody.velocity*1.3f;
 		}
 	}
-//	//damage movement controller
-//	void damage_movement(){
-//		if (interval <= 0.2f) {
-//			PlayerStatus=(uint)(PlayerStatus & (uint)~status_damage03);
-//			switch (direction_value_now) {
-//			case 1:
-//				gameObject.transform.position=new Vector3(gameObject.transform.position.x-0.5f,gameObject.transform.position.y,gameObject.transform.position.z);
-//				break;
-//			default:
-//				break;
-//			}
-//		}
-	//}
+
+	private void playerMovement(float movement){
+		switch (direction_value_now) {
+		case direction_right:
+			PlayerRigidbody.velocity = new Vector3 (movement, 0.0f, 0.0f);
+			break;
+		case direction_left:
+			PlayerRigidbody.velocity = new Vector3 (-movement, 0.0f, 0.0f);
+			break;
+		case direction_up:
+			PlayerRigidbody.velocity = new Vector3 (0.0f, 0.0f, movement);
+			break;
+		case direction_right_up:
+			PlayerRigidbody.velocity = new Vector3 (movement * 0.707f, 0.0f, movement * 0.707f);
+			break;
+		case direction_left_up:
+			PlayerRigidbody.velocity = new Vector3 (-movement * 0.707f, 0.0f, movement * 0.707f);
+			break;
+		case direction_down:
+			PlayerRigidbody.velocity = new Vector3 (0.0f, 0.0f, -movement);
+			break;
+		case direction_right_down:
+			PlayerRigidbody.velocity = new Vector3 (movement * 0.707f, 0.0f, -movement * 0.707f);
+			break;
+		case direction_left_down:
+			PlayerRigidbody.velocity = new Vector3 (-movement * 0.707f, 0.0f, -movement * 0.707f);
+			break;
+
+		default:
+			break;
+		}
+	}
 
 	//当攻击的时候激活武器的碰撞体相应的时间然后取消碰撞
     private void Attack01ColliderController()

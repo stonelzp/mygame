@@ -1948,11 +1948,10 @@ Animation:
   - {fileID: 7400000, guid: 40cc649cbd0fc73408eb99514dc91db0, type: 2}
   - {fileID: 7400000, guid: 828a66dde5b31df4db6a8ca13aa4918c, type: 2}
   - {fileID: 7400000, guid: aa5fcc825d071254aa2594fd4b0c79ab, type: 2}
-  - {fileID: 7400000, guid: 934bbecc4de6a52429777927b972e5e9, type: 2}
   - {fileID: 7400000, guid: 644a99b907b8a2444adb4c94f4b4e4a8, type: 2}
+  - {fileID: 7400000, guid: 6d1d5e8769dd6fc4f86cd8f219d05495, type: 2}
   - {fileID: 7400000, guid: 6d5186c9b6f367441a14d3021675ef9e, type: 2}
   - {fileID: 7400000, guid: 05e707b6225a3804fbd8f67f0003f192, type: 2}
-  - {fileID: 7400000, guid: 6d1d5e8769dd6fc4f86cd8f219d05495, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -1968,9 +1967,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec66a2177c42a4cada68dce42dc80906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Particle01: {fileID: 0}
-  Particle02: {fileID: 0}
-  Particle03: {fileID: 0}
+  Particle01: {fileID: 1910693490658476, guid: 63063f89bea43bc4886d787dd9814f41, type: 2}
+  Particle02: {fileID: 1748095813095874, guid: 211400b4aa2b1a144a9928b55eaa86e7, type: 2}
+  Particle03: {fileID: 1611699795931090, guid: e025ae9db68603a4ba270209291d4ed8, type: 2}
   ObjectWeaponCollider: {fileID: 113816}
 --- !u!136 &13686080
 CapsuleCollider:
