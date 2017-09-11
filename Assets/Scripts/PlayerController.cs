@@ -254,7 +254,8 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay.CrossFade ("Skill03", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
 			interval = (AnimationPlay ["Skill03"].length / AnimationPlay ["Skill03"].speed) * 0.98f;
-			Invoke ("particle03Play",0.5f);
+			//Invoke ("particle03Play",0.5f);
+			skillManagement("MagicSkill02");
 			break;
 		case "MagicSkill01":
 			AnimationPlay ["MagicAttack_B"].wrapMode = WrapMode.Once;
@@ -899,6 +900,11 @@ public class PlayerController : MonoBehaviour
                 particleEffectManagement(1);
                 StartCoroutine(delayToPlayParticle02());
                 break;
+		case "MagicSkill02":
+			//Skill "F" particlesystem
+			//particleEffectManagement (3);
+			StartCoroutine(delayToPlayParticle03());
+			break;
             default:
                 break;
         }
@@ -913,9 +919,10 @@ public class PlayerController : MonoBehaviour
 			float OffsetX01 = -0.732f;
 			float OffsetY01 = 1.132f;
 			float OffsetZ01 = -0.36f;
-                //Vector3 V = new Vector3(OffsetX01, OffsetY01, OffsetZ01);
-                Vector3 A_P01 = getTargetParticlePosotion(OffsetX01, OffsetY01, OffsetZ01);
-                GameObject AttackParticle01 = Instantiate (Particle01, A_P01, Quaternion.identity);
+            //Vector3 V = new Vector3(OffsetX01, OffsetY01, OffsetZ01);
+			//Attack positon
+            Vector3 A_P01 = getTargetParticlePosotion(OffsetX01, OffsetY01, OffsetZ01);
+            GameObject AttackParticle01 = Instantiate (Particle01, A_P01, Quaternion.identity);
 			StartCoroutine (GameobjectDestory (AttackParticle01,2.0f));
 			break;
 		case 2:
@@ -929,11 +936,18 @@ public class PlayerController : MonoBehaviour
                 //Vector3 V2 = new Vector3(OffsetX02, OffsetY02, OffsetZ02);
                 //Attack02 skill particle effect
                 //GameObject AttackParticle02 = Instantiate(Particle02,A_P02,Quaternion.identity);
-			GameObject AttackParticle02 = Instantiate(Particle02,A_P02,Quaternion.AngleAxis(P_Rotation,Vector3.up));
-
-
+			GameObject AttackParticle02 = Instantiate (Particle02, A_P02, Quaternion.AngleAxis (P_Rotation, Vector3.up));
+			StartCoroutine (GameobjectDestory (AttackParticle02, 2.0f));
                 //StartCoroutine(doAttack02ParticleEffect());
                 break;
+		case 3:
+			float OffsetX03 = -1.042f;
+			float OffsetY03 = 0.0f;
+			float OffsetZ03 = 0.0f;
+			Vector3 A_P03 = getTargetParticlePosotion (OffsetX03, OffsetY03, OffsetZ03);
+			GameObject AttackParticle03 = Instantiate (Particle03, A_P03, Quaternion.identity);
+			StartCoroutine (GameobjectDestory(AttackParticle03,2.0f));
+			break;
 		default:
 			break;
 
@@ -1020,32 +1034,18 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         particleEffectManagement(2);
+
     }
+	private IEnumerator delayToPlayParticle03(){
+		yield return new WaitForSeconds (0.3f);
+		particleEffectManagement (3);
+	}
 
     //after delaytime destory the gameobject 
 	private IEnumerator GameobjectDestory(GameObject objectname, float delaytime){
 		yield return new WaitForSeconds (delaytime);
 		Destroy (objectname);
 
-	}
-
-
-
-	void particle02Play(){
-		if (!Particle02.activeSelf) {
-			Particle02.SetActive (true);
-		} else {
-			Particle02.SetActive (false);
-			Particle02.SetActive (true);
-		}
-	}
-	void particle03Play(){
-		if (!Particle03.activeSelf) {
-			Particle03.SetActive (true);
-		} else {
-			Particle03.SetActive (false);
-			Particle03.SetActive (true);
-		}
 	}
 
 	//when DialogueTrigger is trigged,play talk animation
