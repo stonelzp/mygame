@@ -20,15 +20,15 @@ public class PlayerController : MonoBehaviour
 	//direction
 	// 0:still,1:velocity_right,2:velocity_left,4:velocity_up,8:velocity_down
 	private uint direction_value_now = 0;//0000
-	private uint direction_right = 1;//→  0001
-	private uint direction_left = 2;//←  0010
-	private uint direction_up = 4;//↑  0100
-	private uint direction_down = 8;//↓  1000
-	private uint direction_mask = 15;//1111
-	private uint direction_right_up=5;//0101
-	private uint direction_right_down=9;//1001
-	private uint direction_left_up=6;//0110
-	private uint direction_left_down=10;//1010
+	private const uint direction_right = 1;//→  0001
+	private const uint direction_left = 2;//←  0010
+	private const uint direction_up = 4;//↑  0100
+	private const uint direction_down = 8;//↓  1000
+	private const uint direction_mask = 15;//1111
+	private const uint direction_right_up=5;//0101
+	private const uint direction_right_down=9;//1001
+	private const uint direction_left_up=6;//0110
+	private const uint direction_left_down=10;//1010
 
 	private Vector3 velocity_zero = new Vector3 (0.0f, 0.0f, 0.0f);
 	private Vector3 velocity_right = new Vector3 (1.0f, 0.0f, 0.0f);
@@ -918,15 +918,20 @@ public class PlayerController : MonoBehaviour
                 GameObject AttackParticle01 = Instantiate (Particle01, A_P01, Quaternion.identity);
 			StartCoroutine (GameobjectDestory (AttackParticle01,2.0f));
 			break;
-            case 2:
+		case 2:
                 //Attack01 skill particle effect
-                float OffsetX02 = -2.331f;
-                float OffsetY02 = 1.173f;
-                float OffsetZ02 = -0.089f;
-                Vector3 A_P02 = getTargetParticlePosotion(OffsetX02, OffsetY02, OffsetZ02);
+			float OffsetX02 = -1.891f;
+			float OffsetY02 = 0.59f;
+			float OffsetZ02 = -0.128f;
+			Vector3 A_P02 = getTargetParticlePosotion (OffsetX02, OffsetY02, OffsetZ02);
+			float P_Rotation = getTargetParticleRotation ();
+			//Vector3 A_P02 = getTargetParticlePosotion(0.0f, 0.0f, 0.0f);
                 //Vector3 V2 = new Vector3(OffsetX02, OffsetY02, OffsetZ02);
                 //Attack02 skill particle effect
-                GameObject AttackParticle02 = Instantiate(Particle02,A_P02,Quaternion.identity);
+                //GameObject AttackParticle02 = Instantiate(Particle02,A_P02,Quaternion.identity);
+			GameObject AttackParticle02 = Instantiate(Particle02,A_P02,Quaternion.AngleAxis(P_Rotation,Vector3.up));
+
+
                 //StartCoroutine(doAttack02ParticleEffect());
                 break;
 		default:
@@ -972,8 +977,43 @@ public class PlayerController : MonoBehaviour
             V = Quaternion.AngleAxis(315, Vector3.up) * V;
         }
         A_P = new Vector3(gameObject.transform.position.x + V.x, gameObject.transform.position.y + V.y, gameObject.transform.position.z + V.z);
+		Debug.Log (gameObject.transform.position);
         return A_P;
     }
+
+	private float getTargetParticleRotation(){
+		float p_rotation = 0.0f;
+		switch (direction_value_now) {
+		case direction_left:
+			p_rotation = 0.0f;
+			break;
+		case direction_right:
+			p_rotation = 180.0f;
+			break;
+		case direction_up:
+			p_rotation = 90.0f;
+			break;
+		case direction_down:
+			p_rotation = 270.0f;
+			break;
+		case direction_left_up:
+			p_rotation = 45.0f;
+			break;
+		case direction_right_up:
+			p_rotation = 135.0f;
+			break;
+		case direction_right_down:
+			p_rotation = 225.0f;
+			break;
+		case direction_left_down:
+			p_rotation = 315.0f;
+			break;
+		default:
+			p_rotation = 0.0f;
+			break;
+		}
+		return p_rotation;
+	}
 
 
     private IEnumerator delayToPlayParticle02()
