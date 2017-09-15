@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
 
 	//the interval between the behavior
 	private float interval=0.0f;
+	private float interval_max_jump = 0.0f;
 
 	// Use this for initialization
 	void Start ()
@@ -78,12 +79,11 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		Debug.Log (PlayerRigidbody.velocity);
 		//can the animation be interrupted?
 		if(interval<=0.0f){
 			statuscontroller ();
 		}
-
-
 
 		//skill run attack movement controller
 		if((PlayerStatus&status_run_attack)==status_run_attack && interval>0.0f){
@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
 		//jump movement controller
 		if((PlayerStatus&status_jump)==status_jump && interval>0.0f){
 			jump_movement ();
+			jumpColliderMovement ();
 			if (interval <= 1.0f) {
 				PlayerStatus=(uint)(PlayerStatus & (uint)~status_jump);
 			}
@@ -205,7 +206,10 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay ["Jump"].wrapMode = WrapMode.Once;
 			AnimationPlay.CrossFade ("Jump", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
-			interval=(AnimationPlay ["Jump"].length / AnimationPlay ["Jump"].speed) * 0.95f;
+			//跳起来的时候有很长的一段时间的硬直，是不是可以考虑将interval时间再缩减到0.8倍
+			interval = (AnimationPlay ["Jump"].length / AnimationPlay ["Jump"].speed) * 0.95f;
+			//Debug.Log ("Jump"+interval);//1.425s
+			interval_max_jump = interval;
 			break;
 		case "Dodge":
 			AnimationPlay ["Dodge"].wrapMode = WrapMode.Once;
@@ -258,7 +262,6 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay.CrossFade ("Skill03", 0.3f);
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.3f);
 			interval = (AnimationPlay ["Skill03"].length / AnimationPlay ["Skill03"].speed) * 0.98f;
-			//Invoke ("particle03Play",0.5f);
 			skillManagement("MagicSkill02");
 			break;
 		case "MagicSkill01":
@@ -270,18 +273,7 @@ public class PlayerController : MonoBehaviour
 			AnimationPlay.CrossFadeQueued ("Battle_Idle", 0.0f);
 			interval = (AnimationPlay ["MagicAttack_B"].length / AnimationPlay ["MagicAttack_B"].speed + AnimationPlay ["MagicAttack_M"].length / AnimationPlay ["MagicAttack_M"].speed + AnimationPlay ["MagicAttack_E"].length / AnimationPlay ["MagicAttack_E"].speed);
 			//magic particle
-			//particleEffectManagement(1);
             skillManagement("MagicSkill01");
-
-
-
-//			if (!Particle01.activeSelf) {
-//				Particle01.SetActive (true);
-//			} else {
-//				Particle01.SetActive (false);
-//				Particle01.SetActive (true);
-//			}
-//			Invoke ("particle02Play",1.5f);
 			break;
 		case "Normal_Talk":
 			AnimationPlay ["Normal_Talk"].wrapMode = WrapMode.Loop;
@@ -580,7 +572,7 @@ public class PlayerController : MonoBehaviour
 	}
 
 	//lock status movecontroller
-		void lock_in_movementcontroller(uint direction){
+	void lock_in_movementcontroller(uint direction){
 			//uint rotation_y=(uint)(transform.rotation.y);
 			switch(direction_value_now){
 			case 4://direction up
@@ -705,35 +697,8 @@ public class PlayerController : MonoBehaviour
 	void run_attack_movement(){
 		//warn:it should not exit number 0.75
 		//
-		switch (direction_value_now) {
-		case 1:
-			PlayerRigidbody.velocity = new Vector3 (2.5f,0.0f,0.0f);
-			break;
-		case 2:
-			PlayerRigidbody.velocity = new Vector3 (-2.5f,0.0f,0.0f);
-			break;
-		case 4:
-			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,2.5f);
-			break;
-		case 5:
-			PlayerRigidbody.velocity = new Vector3 (1.58f,0.0f,1.58f);
-			break;
-		case 6:
-			PlayerRigidbody.velocity = new Vector3 (-1.58f,0.0f,1.58f);
-			break;
-		case 8:
-			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,-2.5f);
-			break;
-		case 9:
-			PlayerRigidbody.velocity = new Vector3 (1.58f,0.0f,-1.58f);
-			break;
-		case 10:
-			PlayerRigidbody.velocity = new Vector3 (-1.58f,0.0f,-1.58f);
-			break;
-
-		default:
-			break;
-		}
+		float movement = 2.5f;
+		playerMovement (movement);
 	}
 	//dodge movement controller
 	void dodge_movement(){
@@ -756,38 +721,44 @@ public class PlayerController : MonoBehaviour
 	}
 	//jump movement controller
 	void jump_movement(){
-		switch (direction_value_now) {
-		case 1:
-			PlayerRigidbody.velocity = new Vector3 (2.0f, 0.0f, 0.0f);
-			break;
-		case 2:
-			PlayerRigidbody.velocity = new Vector3 (-2.0f,0.0f,0.0f);
-			break;
-		case 4:
-			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,2.0f);
-			break;
-		case 5:
-			PlayerRigidbody.velocity = new Vector3 (2.828f,0.0f,2.828f);
-			break;
-		case 6:
-			PlayerRigidbody.velocity = new Vector3 (-2.828f,0.0f,2.828f);
-			break;
-		case 8:
-			PlayerRigidbody.velocity = new Vector3 (0.0f,0.0f,-2.0f);
-			break;
-		case 9:
-			PlayerRigidbody.velocity = new Vector3 (2.828f,0.0f,-2.828f);
-			break;
-		case 10:
-			PlayerRigidbody.velocity = new Vector3 (-2.828f,0.0f,-2.828f);
-			break;
-		default:
-			break;
+		if (PlayerRigidbody.velocity != velocity_zero) {
+			float movement = 2.0f;
+			playerMovement (movement);
+			if ((PlayerStatus & status_run) == status_run) {
+				//if is running
+				PlayerRigidbody.velocity = PlayerRigidbody.velocity * 1.3f;
+			}
 		}
-		if ((PlayerStatus & status_run) == status_run) {
-			//if is running
-			PlayerRigidbody.velocity=PlayerRigidbody.velocity*1.3f;
-		}
+	}
+	//when player jump,Player collider should be moved(collide.center from 0.85->2.25)
+	private void jumpColliderMovement(){
+//		Debug.Log("Jump");
+//		//gameObject.GetComponent<CapsuleCollider> ().center的初始值是0.85，不同的场景可能会有变化
+//		if (interval >= interval_max_jump * 0.95f) {
+//			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.2f,0.0f);
+//		}
+//		if (interval >= interval_max_jump * 0.9f) {
+//			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.55f,0.0f);
+//		}
+//		if (interval >= interval_max_jump * 0.85f) {
+//			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.9f,0.0f);
+//		}
+//		if (interval >= interval_max_jump * 0.8f) {
+//			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,2.25f,0.0f);
+//		}
+//		if (interval >= interval_max_jump * 0.75f) {
+//			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.9f,0.0f);
+//		}
+//		if (interval >= interval_max_jump * 0.7f) {
+//			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.55f,0.0f);
+//		}
+//		if (interval >= interval_max_jump * 0.65f) {
+//			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.2f,0.0f);
+//		}
+//		if (interval >= interval_max_jump * 0.6f) {
+//			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,0.85f,0.0f);
+//		}
+		gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,2.25f,0.0f);
 	}
 
 	private void playerMovement(float movement){
@@ -986,7 +957,6 @@ public class PlayerController : MonoBehaviour
 		return p_rotation;
 	}
 
-
     private IEnumerator delayToPlayParticle02()
     {
         yield return new WaitForSeconds(1.5f);
@@ -1002,7 +972,6 @@ public class PlayerController : MonoBehaviour
 	private IEnumerator GameobjectDestory(GameObject objectname, float delaytime){
 		yield return new WaitForSeconds (delaytime);
 		Destroy (objectname);
-
 	}
 
 	//when DialogueTrigger is trigged,play talk animation
