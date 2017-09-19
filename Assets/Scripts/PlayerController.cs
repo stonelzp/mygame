@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		Debug.Log (PlayerRigidbody.velocity);
+		//Debug.Log (PlayerRigidbody.velocity);
 		//can the animation be interrupted?
 		if(interval<=0.0f){
 			statuscontroller ();
@@ -732,33 +732,35 @@ public class PlayerController : MonoBehaviour
 	}
 	//when player jump,Player collider should be moved(collide.center from 0.85->2.25)
 	private void jumpColliderMovement(){
-//		Debug.Log("Jump");
-//		//gameObject.GetComponent<CapsuleCollider> ().center的初始值是0.85，不同的场景可能会有变化
+		//动画里面自带位移，当挪动碰撞体的时候人物会掉下去，这是因为动的是动画本身，碰撞体本身没有动
+		//Debug.Log("Jump");
+		//gameObject.GetComponent<CapsuleCollider> ().center的初始值是0.85，不同的场景可能会有变化
 //		if (interval >= interval_max_jump * 0.95f) {
 //			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.2f,0.0f);
 //		}
-//		if (interval >= interval_max_jump * 0.9f) {
+//		else if (interval >= interval_max_jump * 0.9f) {
 //			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.55f,0.0f);
 //		}
-//		if (interval >= interval_max_jump * 0.85f) {
+//		else if (interval >= interval_max_jump * 0.85f) {
 //			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.9f,0.0f);
 //		}
-//		if (interval >= interval_max_jump * 0.8f) {
+//		else if (interval >= interval_max_jump * 0.8f) {
 //			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,2.25f,0.0f);
 //		}
-//		if (interval >= interval_max_jump * 0.75f) {
+//		else if (interval >= interval_max_jump * 0.75f) {
 //			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.9f,0.0f);
 //		}
-//		if (interval >= interval_max_jump * 0.7f) {
+//		else if (interval >= interval_max_jump * 0.7f) {
 //			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.55f,0.0f);
 //		}
-//		if (interval >= interval_max_jump * 0.65f) {
+//		else if (interval >= interval_max_jump * 0.65f) {
 //			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,1.2f,0.0f);
 //		}
-//		if (interval >= interval_max_jump * 0.6f) {
+//		else {
 //			gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,0.85f,0.0f);
 //		}
-		gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,2.25f,0.0f);
+//		//gameObject.GetComponent<CapsuleCollider> ().center = new Vector3(0.0f,2.25f,0.0f);
+//		Debug.Log(gameObject.GetComponent<CapsuleCollider>().center);
 	}
 
 	private void playerMovement(float movement){
