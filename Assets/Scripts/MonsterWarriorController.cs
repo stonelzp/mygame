@@ -29,6 +29,9 @@ public class MonsterWarriorController : MonoBehaviour {
     private float AttackAreaDistance = 0.0f;
 	private float AttackCoolDown = 0.0f;
 
+	//the monster origin position
+	private Vector3 MonsterOriginPosition;
+
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +45,8 @@ public class MonsterWarriorController : MonoBehaviour {
 		NearTarget = false;
         MonsterIsDead = false;
         DeadToDisappearTime = 3.0f;
+
+		MonsterOriginPosition = gameObject.transform.position;
 
 	}
 
@@ -128,7 +133,7 @@ public class MonsterWarriorController : MonoBehaviour {
     //Monsters AI :contains
     //patroling routine
     //Attack
-
+	//怪物巡逻的制作：使用怪物的自动寻路系统转弯的时候总觉得违和，考虑放弃在巡逻的部分使用自动寻路系统
     private void MonsterPatrol()
     {
 		if (MonsterIsMoving ()) {
@@ -184,6 +189,7 @@ public class MonsterWarriorController : MonoBehaviour {
 	public void setBoolNearTarget(bool sign){
         AttackAreaDistance= Vector3.Distance(AttackTarget.position,gameObject.transform.position);
 		NearTarget = sign;
+		isPatrolling = false;
 	}
 	private IEnumerator AttackAcion(){
 		if (AttackCoolDown <= 0.0f) {
