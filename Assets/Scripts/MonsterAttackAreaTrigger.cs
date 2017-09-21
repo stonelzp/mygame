@@ -18,7 +18,7 @@ public class MonsterAttackAreaTrigger : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player") {
-			monster_controller.setBoolNearTarget (true);
+			monster_controller.setNearTargetToTrue ();
 		}
 	}
 }

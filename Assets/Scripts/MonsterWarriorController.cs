@@ -59,10 +59,14 @@ public class MonsterWarriorController : MonoBehaviour {
 
 		if (isPatrolling) {
 			MonsterPatrol ();
-		} else {
-			MonsterAttack ();
+		} 
+
+		if(NearTarget){
+			//if NearTarget is true,monster should attack the enemy
 		}
-        Debug.Log(MonsterIsDead);
+
+
+
         if (MonsterIsDead)
         {
             if (DeadToDisappearTime > 0.0f)
@@ -186,9 +190,11 @@ public class MonsterWarriorController : MonoBehaviour {
 
 	}
 	//for the Script:MonsterAttackAreaTrigger.cs to set bool NearTarget
-	public void setBoolNearTarget(bool sign){
+	public void setNearTargetToTrue(){
+		//player is in attack area
         AttackAreaDistance= Vector3.Distance(AttackTarget.position,gameObject.transform.position);
-		NearTarget = sign;
+		Debug.Log ("monster attack radium" + AttackAreaDistance);
+		NearTarget = true;
 		isPatrolling = false;
 	}
 	private IEnumerator AttackAcion(){
