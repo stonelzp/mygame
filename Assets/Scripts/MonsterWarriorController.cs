@@ -59,14 +59,15 @@ public class MonsterWarriorController : MonoBehaviour {
 			AttackCoolDown -= Time.deltaTime;
 		}
 
-		if (isPatrolling) {
-			MonsterPatrol ();
-		} 
-
-		if(NearTarget){
-			//if NearTarget is true,monster should attack the enemy
-		}
-
+//		if (isPatrolling) {
+//			MonsterPatrol ();
+//		} 
+//
+//		if(NearTarget){
+//			//if NearTarget is true,monster should attack the enemy
+//		}
+//
+		MonsterAIManagement();
 
 
         if (MonsterIsDead)
@@ -159,6 +160,10 @@ public class MonsterWarriorController : MonoBehaviour {
 	}
 
 	private void MonsterSearchTarget(){
+		if(!gameObject.GetComponent<NavMeshAgent>().enabled){
+			gameObject.GetComponent<NavMeshAgent> ().enabled = true;
+			MonsterAnimator.SetBool ("Run", true);
+		}
 		gameObject.GetComponent<NavMeshAgent> ().destination = AttackTarget.position;
 		float distanceBetweenMonsterAndTarget = Vector3.Distance (gameObject.transform.position,AttackTarget.position);
 		//如果monster跟target之间的距离超过了设定距离则让怪物返回，回到巡逻的状态
@@ -250,6 +255,7 @@ public class MonsterWarriorController : MonoBehaviour {
 		MonsterAnimator.SetTrigger ("Attack01");
 		yield return new WaitForSeconds(1.9f);
 		animationAttackIsPlaying = false;
+		//如果monster完成了攻击的动画此时检查与攻击目标之间的距离，如果超过了攻击的范围则需要将“靠近了攻击目标（NearTarget）”置为false
 		if(Vector3.Distance(gameObject.transform.position,AttackTarget.position) > AttackAreaDistance){
 			NearTarget = false;
 		}
