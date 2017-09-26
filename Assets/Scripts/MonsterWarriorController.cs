@@ -24,6 +24,7 @@ public class MonsterWarriorController : MonoBehaviour {
     private Vector3 PatrolPosition;
 	private Vector3 StartPosition;
 	private Vector3 EndPosition;
+	private bool PatrolBack = false;
 
     //the distance of Monster Attack Area
     private float AttackAreaDistance = 0.0f;
@@ -31,8 +32,8 @@ public class MonsterWarriorController : MonoBehaviour {
 
 	//the monster origin position
 	private Vector3 MonsterOriginPosition;
-	private float monsterFollowingDistance = 40.0f;
-	private float monsterPatrollMaxDistance = 200.0f;
+	private float monsterFollowingDistance = 15.0f;
+	private float monsterPatrollMaxDistance = 20.0f;
 	private bool animationAttackIsPlaying = false;
 
 	// Use this for initialization
@@ -162,6 +163,7 @@ public class MonsterWarriorController : MonoBehaviour {
 	private void MonsterSearchTarget(){
 		if(!gameObject.GetComponent<NavMeshAgent>().enabled){
 			gameObject.GetComponent<NavMeshAgent> ().enabled = true;
+			//索敌的时候播放Run的动画好还是当Rigidbody有位移的时候再播放动画好呢？
 			MonsterAnimator.SetBool ("Run", true);
 		}
 		gameObject.GetComponent<NavMeshAgent> ().destination = AttackTarget.position;
@@ -180,9 +182,18 @@ public class MonsterWarriorController : MonoBehaviour {
 
     private void MonsterPatrol()
     {
+		//将巡逻的过程分为去跟回
+		//开始巡逻的时候
+		if (!PatrolBack) {
+			
+		} else {
+			//到达巡逻的地方需要返回到初始的地方
+		}
+
+
 		if (MonsterIsMoving ()) {
 			MonsterAnimator.SetBool ("Run", true);
-		} else {
+		} else { 
 			MonsterAnimator.SetBool ("Run", false);
 			//set the next Patrol place
 			if (Vector3.Distance (EndPosition, PatrolPosition) <= 0.1f) {
