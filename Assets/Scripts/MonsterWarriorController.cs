@@ -59,15 +59,6 @@ public class MonsterWarriorController : MonoBehaviour {
 		if(AttackCoolDown>0.0f){
 			AttackCoolDown -= Time.deltaTime;
 		}
-
-//		if (isPatrolling) {
-//			MonsterPatrol ();
-//		} 
-//
-//		if(NearTarget){
-//			//if NearTarget is true,monster should attack the enemy
-//		}
-//
 		MonsterAIManagement();
 
 
@@ -81,7 +72,6 @@ public class MonsterWarriorController : MonoBehaviour {
                 MonsterToDelete();
             }
         }
-
     }
 
     private void GetMonsterInput()
@@ -182,41 +172,26 @@ public class MonsterWarriorController : MonoBehaviour {
 
     private void MonsterPatrol()
     {
+		//enable the NavMeshAgent component
+		if (!gameObject.GetComponent<NavMeshAgent>().enabled)
+		{
+			gameObject.GetComponent<NavMeshAgent>().enabled = true;
+		}
+		MonsterAnimator.SetBool ("Run",true);
 		//将巡逻的过程分为去跟回
 		//开始巡逻的时候
-		if (!PatrolBack) {
-			
+		if (!PatrolBack) {//开始巡逻
+			gameObject.GetComponent<NavMeshAgent> ().destination = PatrolPosition;
 		} else {
-			//到达巡逻的地方需要返回到初始的地方
+			//到达巡逻的地方需要返回到初始的地方，从巡逻完毕的位置返回
+			gameObject.GetComponent<NavMeshAgent>().destination = MonsterOriginPosition;
 		}
-
-
-		if (MonsterIsMoving ()) {
-			MonsterAnimator.SetBool ("Run", true);
-		} else { 
-			MonsterAnimator.SetBool ("Run", false);
-			//set the next Patrol place
-			if (Vector3.Distance (EndPosition, PatrolPosition) <= 0.1f) {
-				Debug.Log ("Goal!");
-				PatrolPosition = StartPosition;
-				gameObject.GetComponent<NavMeshAgent> ().destination = PatrolPosition;
-				return;
-			} 
-			if(Vector3.Distance (StartPosition, PatrolPosition) <= 0.1f){
-				PatrolPosition = EndPosition;
-				gameObject.GetComponent<NavMeshAgent> ().destination = PatrolPosition;
-			}
+		//获取此时monster现在的位置跟巡逻地方之间的距离，如果到达了巡逻位置
+		float distance = Vector3.Distance (gameObject.GetComponent<NavMeshAgent>().destination,gameObject.transform.position);
+		if (distance < 0.1f) {
+			PatrolBack = !PatrolBack;
 		}
     }
-
-	private bool MonsterIsMoving(){
-		if (Vector3.Distance (gameObject.transform.position, PatrolPosition) > 0.3f) {
-			return true;
-		} else {
-			Debug.Log ("Turn Round");
-			return false;
-		}
-	}
 
 	//monster attack action
 	private void MonsterAttack(){
