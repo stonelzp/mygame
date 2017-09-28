@@ -15,4 +15,4 @@
 
 12. 当游戏刚开始的时候，没有输入，direction_value_now没有值，导致开始的飞踹动作（只要是动作带有位移的）在原地活动(已解决)
 13. 当player攻击墙壁的时候，有了碰撞体的碰撞导致player自己被撞飞。
-14. 当player从后面接近monster的时候，触发了monster的攻击范围触发器但是攻击的方向并没有成功的对向player的方向。
+14. 当player从后面接近monster的时候，触发了monster的攻击范围触发器但是攻击的方向并没有成功的对向player的方向。(要是加上一个monster的感知范围，当player靠近monster一定的范围，变当做发现了目标并开始寻路面向player)。

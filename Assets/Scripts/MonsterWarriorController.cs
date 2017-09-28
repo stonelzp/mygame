@@ -154,7 +154,7 @@ public class MonsterWarriorController : MonoBehaviour {
 		if(!gameObject.GetComponent<NavMeshAgent>().enabled){
 			gameObject.GetComponent<NavMeshAgent> ().enabled = true;
 			//索敌的时候播放Run的动画好还是当Rigidbody有位移的时候再播放动画好呢？
-			MonsterAnimator.SetBool ("Run", true);
+			MonsterAnimationPlay("MonsterSearchingTarget");
 		}
 		gameObject.GetComponent<NavMeshAgent> ().destination = AttackTarget.position;
 		float distanceBetweenMonsterAndTarget = Vector3.Distance (gameObject.transform.position,AttackTarget.position);
@@ -177,7 +177,7 @@ public class MonsterWarriorController : MonoBehaviour {
 		{
 			gameObject.GetComponent<NavMeshAgent>().enabled = true;
 		}
-		MonsterAnimator.SetBool ("Run",true);
+		MonsterAnimationPlay ("MonsterPatroll");
 		//将巡逻的过程分为去跟回
 		//开始巡逻的时候
 		if (!PatrolBack) {//开始巡逻
@@ -237,8 +237,7 @@ public class MonsterWarriorController : MonoBehaviour {
 			AttackCoolDown = 2.0f;
 		}
         gameObject.GetComponent<NavMeshAgent> ().enabled = false;
-        MonsterAnimator.SetBool("Run",false);
-		MonsterAnimator.SetTrigger ("Attack01");
+		MonsterAnimationPlay ("MonsterAttack");
 		yield return new WaitForSeconds(1.9f);
 		animationAttackIsPlaying = false;
 		//如果monster完成了攻击的动画此时检查与攻击目标之间的距离，如果超过了攻击的范围则需要将“靠近了攻击目标（NearTarget）”置为false
@@ -269,28 +268,20 @@ public class MonsterWarriorController : MonoBehaviour {
             {
                 gameObject.GetComponent<NavMeshAgent>().enabled = false;
             }
-            MonsterAnimator.SetBool("Run", false);
-            //MonsterAnimator.SetTrigger("Dead");
-            /*if (gameObject.GetComponent<MonsterWarriorController>().enabled) {
-                gameObject.GetComponent<MonsterWarriorController>().enabled = false;
-            }*/
             if (gameObject.GetComponent<CapsuleCollider>().enabled)
             {
-                MonsterAnimator.SetTrigger("Dead");
                 gameObject.GetComponent<CapsuleCollider>().enabled = false;
             }
-            
+			MonsterAnimationPlay ("MonsterDead");
             yield return new WaitForSeconds(2.0f);
         }
         else
         {
-            Debug.Log("MonsterDamage");
             if (gameObject.GetComponent<NavMeshAgent>().enabled)
             {
                 gameObject.GetComponent<NavMeshAgent>().enabled = false;
             }
-            MonsterAnimator.SetBool("Run", false);
-            MonsterAnimator.SetTrigger("Damage");
+			MonsterAnimationPlay ("MonsterDamage");
             yield return new WaitForSeconds(1.0f);
         }
 
@@ -298,4 +289,31 @@ public class MonsterWarriorController : MonoBehaviour {
     private void MonsterToDelete() {
         Destroy(gameObject);
     }
+	//控制monster的动画的播放
+	private void MonsterAnimationPlay(string name){
+		switch(name){
+		case "MonsterSearchingTarget":
+			MonsterAnimator.SetBool ("Run", true);
+			break;
+		case "MonsterPatroll":
+			MonsterAnimator.SetBool ("Run", true);
+			break;
+		case "MonsterAttack":
+			MonsterAnimator.SetBool ("Run", false);
+			MonsterAnimator.SetTrigger ("Attack01");
+			break;
+		case "MonsterDead":
+			MonsterAnimator.SetBool("Run", false);
+			MonsterAnimator.SetTrigger("Dead");
+			break;
+		case "MonsterDamage":
+			MonsterAnimator.SetBool("Run", false);
+			MonsterAnimator.SetTrigger("Damage");
+			break;
+		default:
+			break;
+		}
+
+
+	}
 }
