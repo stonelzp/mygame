@@ -288,16 +288,27 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4000010642012610, guid: 96b478f7e1fd27341beb9950e9511979, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.8505858
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010642012610, guid: 96b478f7e1fd27341beb9950e9511979, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.1467151
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010642012610, guid: 96b478f7e1fd27341beb9950e9511979, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.50433517
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010642012610, guid: 96b478f7e1fd27341beb9950e9511979, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.024991997
+      objectReference: {fileID: 0}
     - target: {fileID: 114000013444809712, guid: 96b478f7e1fd27341beb9950e9511979,
         type: 2}
       propertyPath: AttackTarget
       value: 
       objectReference: {fileID: 71110464}
-    - target: {fileID: 136000011207082656, guid: 96b478f7e1fd27341beb9950e9511979,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96b478f7e1fd27341beb9950e9511979, type: 2}
   m_IsPrefabParent: 0
