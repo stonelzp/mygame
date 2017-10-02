@@ -309,6 +309,10 @@ Prefab:
       propertyPath: AttackTarget
       value: 
       objectReference: {fileID: 71110464}
+    - target: {fileID: 1000012473267602, guid: 96b478f7e1fd27341beb9950e9511979, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96b478f7e1fd27341beb9950e9511979, type: 2}
   m_IsPrefabParent: 0
@@ -349,6 +353,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 427724, guid: 8fb04a38179624aef9e06063c90c1a85, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 113338, guid: 8fb04a38179624aef9e06063c90c1a85, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
